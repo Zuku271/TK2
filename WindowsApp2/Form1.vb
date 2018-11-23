@@ -1,8 +1,13 @@
-﻿Public Class Form1
+﻿Imports System.IO
+Public Class Form1
+    Inherits System.Windows.Forms.Form
+
     Private CarList As ArrayList = New ArrayList()
     Private ModelList As ArrayList = New ArrayList()
     Private EngineList As ArrayList = New ArrayList()
     Private ColorList As ArrayList = New ArrayList()
+
+    Dim FileList() As FileInfo
 
     Private Sub CarList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CarListBox.SelectedIndexChanged
         ModelListBox.Items.Clear()
@@ -47,6 +52,11 @@
         EngineType.Items.Add("2.5 TFSI")
         ColorType.Items.Add("Normalny")
         ColorType.Items.Add("Metalik")
+
+        Dim id As String = "A1"
+        Dim folder As String = "D:\"
+        Dim filename As String = System.IO.Path.Combine(folder, id & ".jpg")
+        PictureBox1.Image = Image.FromFile(filename)
     End Sub
 
     Private Sub A3ModelSelected()
@@ -54,6 +64,11 @@
         EngineType.Items.Add("3.0 TFSI")
         ColorType.Items.Add("Normalny")
         ColorType.Items.Add("Metalik")
+
+        Dim id As String = "A3"
+        Dim folder As String = "D:\"
+        Dim filename As String = System.IO.Path.Combine(folder, id & ".jpg")
+        PictureBox1.Image = Image.FromFile(filename)
     End Sub
 
     Private Sub CivicModelSelected()
@@ -69,4 +84,5 @@
         ColorType.Items.Add("Normalny")
         ColorType.Items.Add("Metalik")
     End Sub
+
 End Class

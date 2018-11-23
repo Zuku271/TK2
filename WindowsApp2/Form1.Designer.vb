@@ -33,22 +33,24 @@ Partial Class Form1
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'CarList
+        'CarListBox
         '
         Me.CarListBox.FormattingEnabled = True
         Me.CarListBox.Items.AddRange(New Object() {"Audi", "Skoda", "Honda", "Porsche", "Chevrolet"})
         Me.CarListBox.Location = New System.Drawing.Point(86, 129)
-        Me.CarListBox.Name = "CarList"
+        Me.CarListBox.Name = "CarListBox"
         Me.CarListBox.Size = New System.Drawing.Size(120, 95)
         Me.CarListBox.TabIndex = 0
         '
-        'ModelList
+        'ModelListBox
         '
         Me.ModelListBox.FormattingEnabled = True
         Me.ModelListBox.Location = New System.Drawing.Point(212, 129)
-        Me.ModelListBox.Name = "ModelList"
+        Me.ModelListBox.Name = "ModelListBox"
         Me.ModelListBox.Size = New System.Drawing.Size(120, 95)
         Me.ModelListBox.TabIndex = 0
         '
@@ -127,14 +129,23 @@ Partial Class Form1
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Button1"
+        Me.Button1.Text = "Dodaj"
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(410, 269)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(300, 300)
+        Me.PictureBox1.TabIndex = 3
+        Me.PictureBox1.TabStop = False
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(726, 617)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
@@ -148,6 +159,7 @@ Partial Class Form1
         Me.Controls.Add(Me.CarListBox)
         Me.Name = "Form1"
         Me.Text = "Form1"
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -164,4 +176,5 @@ Partial Class Form1
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents PictureBox1 As PictureBox
 End Class
