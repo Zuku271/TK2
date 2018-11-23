@@ -22,8 +22,8 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.CarList = New System.Windows.Forms.ListBox()
-        Me.ModelList = New System.Windows.Forms.ListBox()
+        Me.CarListBox = New System.Windows.Forms.ListBox()
+        Me.ModelListBox = New System.Windows.Forms.ListBox()
         Me.ColorType = New System.Windows.Forms.ListBox()
         Me.Color = New System.Windows.Forms.ListBox()
         Me.EngineType = New System.Windows.Forms.ListBox()
@@ -32,24 +32,25 @@ Partial Class Form1
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'CarList
         '
-        Me.CarList.FormattingEnabled = True
-        Me.CarList.Items.AddRange(New Object() {"Audi", "Skoda", "Honda", "Porsche", "Chevrolet"})
-        Me.CarList.Location = New System.Drawing.Point(86, 129)
-        Me.CarList.Name = "CarList"
-        Me.CarList.Size = New System.Drawing.Size(120, 95)
-        Me.CarList.TabIndex = 0
+        Me.CarListBox.FormattingEnabled = True
+        Me.CarListBox.Items.AddRange(New Object() {"Audi", "Skoda", "Honda", "Porsche", "Chevrolet"})
+        Me.CarListBox.Location = New System.Drawing.Point(86, 129)
+        Me.CarListBox.Name = "CarList"
+        Me.CarListBox.Size = New System.Drawing.Size(120, 95)
+        Me.CarListBox.TabIndex = 0
         '
         'ModelList
         '
-        Me.ModelList.FormattingEnabled = True
-        Me.ModelList.Location = New System.Drawing.Point(212, 129)
-        Me.ModelList.Name = "ModelList"
-        Me.ModelList.Size = New System.Drawing.Size(120, 95)
-        Me.ModelList.TabIndex = 0
+        Me.ModelListBox.FormattingEnabled = True
+        Me.ModelListBox.Location = New System.Drawing.Point(212, 129)
+        Me.ModelListBox.Name = "ModelList"
+        Me.ModelListBox.Size = New System.Drawing.Size(120, 95)
+        Me.ModelListBox.TabIndex = 0
         '
         'ColorType
         '
@@ -120,11 +121,21 @@ Partial Class Form1
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "Kolor"
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(86, 260)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 2
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
@@ -133,8 +144,8 @@ Partial Class Form1
         Me.Controls.Add(Me.EngineType)
         Me.Controls.Add(Me.Color)
         Me.Controls.Add(Me.ColorType)
-        Me.Controls.Add(Me.ModelList)
-        Me.Controls.Add(Me.CarList)
+        Me.Controls.Add(Me.ModelListBox)
+        Me.Controls.Add(Me.CarListBox)
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
@@ -142,8 +153,8 @@ Partial Class Form1
 
     End Sub
 
-    Friend WithEvents CarList As ListBox
-    Friend WithEvents ModelList As ListBox
+    Friend WithEvents CarListBox As ListBox
+    Friend WithEvents ModelListBox As ListBox
     Friend WithEvents ColorType As ListBox
     Friend WithEvents Color As ListBox
     Friend WithEvents EngineType As ListBox
@@ -152,4 +163,5 @@ Partial Class Form1
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
+    Friend WithEvents Button1 As Button
 End Class
