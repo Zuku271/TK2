@@ -17,10 +17,12 @@ Public Class Form1
         query_string = "SELECT * FROM Users WHERE Login = '" & LoginBox.Text & "' AND Password = '" & PasswordBox.Text & "';"
         dataadapter = New SqlDataAdapter()
         dataadapter.SelectCommand = New SqlCommand(query_string)
-        Dim sqlBuilder As SqlCommandBuilder
-
+        'Dim sqlBuilder As SqlCommandBuilder
+        Dim SqlConnectionString As String = "Server=;" & "DataBase=..\Database1.mdf;" & "Integrated Security=SSPI"
+        Dim sql_Connection = New SqlConnection(SqlConnectionString)
+        sql_Connection.Open()
         dataadapter = New SqlDataAdapter()
-        sqlBuilder = New SqlCommandBuilder(dataadapter)
+        'sqlBuilder = New SqlCommandBuilder(dataadapter)
         'cnString = "Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=..\Debug\Database1.mdf"
 
         'conn = New System.Data.SqlClient.SqlConnection(cnString)
