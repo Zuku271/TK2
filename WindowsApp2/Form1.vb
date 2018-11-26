@@ -13,15 +13,10 @@ Public Class Form1
         Dim dataset As DataSet
         Dim dataadapter As SqlDataAdapter
 
-        Dim query_string As String
-        query_string = "SELECT * FROM Users WHERE Login = '" & LoginBox.Text & "' AND Password = '" & PasswordBox.Text & "';"
-        dataadapter = New SqlDataAdapter()
-        dataadapter.SelectCommand = New SqlCommand(query_string)
-        'Dim sqlBuilder As SqlCommandBuilder
-        Dim SqlConnectionString As String = "Server=;" & "DataBase=..\Database1.mdf;" & "Integrated Security=SSPI"
-        Dim sql_Connection = New SqlConnection(SqlConnectionString)
-        sql_Connection.Open()
-        dataadapter = New SqlDataAdapter()
+        Dim con As SqlConnection
+        con = New SqlConnection
+        con.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Kody\Git\TK2\WindowsApp2\Database1.mdf;Integrated Security=True;Connect Timeout=30"
+
         'sqlBuilder = New SqlCommandBuilder(dataadapter)
         'cnString = "Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=..\Debug\Database1.mdf"
 
