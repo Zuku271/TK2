@@ -6,10 +6,7 @@ Public Class Form1
 
     Private Sub LoginButton_Click(sender As Object, e As EventArgs) Handles LoginButton.Click
 
-        Dim cnString As String
-
         Dim objTabela As DataTable
-        Dim objWiersz As DataRow
         Dim dataset As DataSet
         Dim dataadapter As SqlDataAdapter
         Dim sql_Command As New SqlCommand("SELECT * FROM Users WHERE Login='" & LoginBox.Text & "' AND Password='" & PasswordBox.Text & "';")
@@ -28,12 +25,26 @@ Public Class Form1
 
         objTabela = New DataTable
         objTabela = dataset.Tables("Users")
-        Dim objRow As DataRow
-        For Each objRow In objTabela.Rows
-            MsgBox(objRow("Login"))
-        Next objRow
+
+        If objTabela.Rows.Count = 1 Then
+            'MsgBox("Zalogowano !")
+            GroupBox1.Visible = True
+            LoginButton.Visible = False
+            LogoutButton.Visible = True
+            GroupBox2.Visible = False
+
+            LoginBox.Clear()
+            PasswordBox.Clear()
+        End If
         conn.Close()
 
-
     End Sub
+
+    Private Sub LogoutButton_Click(sender As Object, e As EventArgs) Handles LogoutButton.Click
+        GroupBox1.Visible = False
+        LoginButton.Visible = True
+        LogoutButton.Visible = False
+        GroupBox2.Visible = True
+    End Sub
+
 End Class

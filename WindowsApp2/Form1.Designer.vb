@@ -46,7 +46,10 @@ Partial Class Form1
         Me.AddNewItemBox = New System.Windows.Forms.TextBox()
         Me.AddNewItemButton = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.LogoutButton = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'CarList
@@ -137,31 +140,31 @@ Partial Class Form1
         '
         'LoginButton
         '
-        Me.LoginButton.Location = New System.Drawing.Point(65, 119)
+        Me.LoginButton.Location = New System.Drawing.Point(50, 93)
         Me.LoginButton.Name = "LoginButton"
         Me.LoginButton.Size = New System.Drawing.Size(75, 23)
         Me.LoginButton.TabIndex = 2
-        Me.LoginButton.Text = "Logowanie"
+        Me.LoginButton.Text = "OK"
         Me.LoginButton.UseVisualStyleBackColor = True
         '
         'LoginBox
         '
-        Me.LoginBox.Location = New System.Drawing.Point(65, 49)
+        Me.LoginBox.Location = New System.Drawing.Point(50, 23)
         Me.LoginBox.Name = "LoginBox"
-        Me.LoginBox.Size = New System.Drawing.Size(139, 20)
+        Me.LoginBox.Size = New System.Drawing.Size(156, 20)
         Me.LoginBox.TabIndex = 3
         '
         'PasswordBox
         '
-        Me.PasswordBox.Location = New System.Drawing.Point(65, 80)
+        Me.PasswordBox.Location = New System.Drawing.Point(50, 54)
         Me.PasswordBox.Name = "PasswordBox"
-        Me.PasswordBox.Size = New System.Drawing.Size(139, 20)
+        Me.PasswordBox.Size = New System.Drawing.Size(156, 20)
         Me.PasswordBox.TabIndex = 3
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(23, 49)
+        Me.Label6.Location = New System.Drawing.Point(8, 23)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(36, 13)
         Me.Label6.TabIndex = 4
@@ -170,7 +173,7 @@ Partial Class Form1
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(23, 83)
+        Me.Label7.Location = New System.Drawing.Point(8, 57)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(39, 13)
         Me.Label7.TabIndex = 5
@@ -269,20 +272,41 @@ Partial Class Form1
         Me.GroupBox1.Size = New System.Drawing.Size(399, 222)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
+        Me.GroupBox1.Text = "Dodawanie danych"
         Me.GroupBox1.Visible = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.PasswordBox)
+        Me.GroupBox2.Controls.Add(Me.LoginButton)
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.LoginBox)
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Location = New System.Drawing.Point(45, 26)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(218, 131)
+        Me.GroupBox2.TabIndex = 9
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Logowanie"
+        '
+        'LogoutButton
+        '
+        Me.LogoutButton.Location = New System.Drawing.Point(269, 39)
+        Me.LogoutButton.Name = "LogoutButton"
+        Me.LogoutButton.Size = New System.Drawing.Size(75, 23)
+        Me.LogoutButton.TabIndex = 2
+        Me.LogoutButton.Text = "Wyloguj"
+        Me.LogoutButton.UseVisualStyleBackColor = True
+        Me.LogoutButton.Visible = False
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1022, 569)
+        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.LogoutButton)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.PasswordBox)
-        Me.Controls.Add(Me.LoginBox)
-        Me.Controls.Add(Me.LoginButton)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
@@ -297,6 +321,8 @@ Partial Class Form1
         Me.Text = "Form1"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -326,4 +352,6 @@ Partial Class Form1
     Friend WithEvents AddNewItemBox As TextBox
     Friend WithEvents AddNewItemButton As Button
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents LogoutButton As Button
 End Class
