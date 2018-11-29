@@ -12,19 +12,28 @@ Public Class Form1
         Dim objWiersz As DataRow
         Dim dataset As DataSet
         Dim dataadapter As SqlDataAdapter
-
-        Dim con As SqlConnection
-        con = New SqlConnection
-        con.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Kody\Git\TK2\WindowsApp2\Database1.mdf;Integrated Security=True;Connect Timeout=30"
-
-        'sqlBuilder = New SqlCommandBuilder(dataadapter)
-        'cnString = "Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=..\Debug\Database1.mdf"
-
-        'conn = New System.Data.SqlClient.SqlConnection(cnString)
-        'conn.Open()
+        Dim sql_Command As New SqlCommand("SELECT * FROM Users WHERE Login='" & LoginBox.Text & "' AND Password='" & PasswordBox.Text & "';")
 
 
-        'Dim objZapytanie As New System.Data.SqlClient.SqlConnection(strSQL, conn)
+        Dim conn As SqlConnection
+        conn = New SqlConnection
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Kody\Git\TK2\WindowsApp2\Database1.mdf;Integrated Security=True;Connect Timeout=30"
+        conn.Open()
+
+        dataadapter = New SqlDataAdapter
+        dataset = New DataSet
+        dataadapter.SelectCommand = sql_Command
+        dataadapter.SelectCommand.Connection = conn
+        dataadapter.Fill(dataset, "Users")
+
+        objTabela = New DataTable
+        objTabela = dataset.Tables("Users")
+        Dim objRow As DataRow
+        For Each objRow In objTabela.Rows
+            MsgBox(objRow("Login"))
+        Next objRow
+        conn.Close()
+
 
     End Sub
 End Class
