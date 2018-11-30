@@ -24,8 +24,8 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.CarList = New System.Windows.Forms.ListBox()
         Me.ModelList = New System.Windows.Forms.ListBox()
-        Me.ColorType = New System.Windows.Forms.ListBox()
-        Me.Color = New System.Windows.Forms.ListBox()
+        Me.ColorTypeList = New System.Windows.Forms.ListBox()
+        Me.ColorList = New System.Windows.Forms.ListBox()
         Me.EngineType = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -49,7 +49,7 @@ Partial Class Form1
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LogoutButton = New System.Windows.Forms.Button()
         Me.LoadDbButton = New System.Windows.Forms.Button()
-        Me.EqType = New System.Windows.Forms.ListBox()
+        Me.EqTypeList = New System.Windows.Forms.ListBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -71,21 +71,21 @@ Partial Class Form1
         Me.ModelList.Size = New System.Drawing.Size(120, 95)
         Me.ModelList.TabIndex = 0
         '
-        'ColorType
+        'ColorTypeList
         '
-        Me.ColorType.FormattingEnabled = True
-        Me.ColorType.Location = New System.Drawing.Point(549, 291)
-        Me.ColorType.Name = "ColorType"
-        Me.ColorType.Size = New System.Drawing.Size(120, 95)
-        Me.ColorType.TabIndex = 0
+        Me.ColorTypeList.FormattingEnabled = True
+        Me.ColorTypeList.Location = New System.Drawing.Point(549, 291)
+        Me.ColorTypeList.Name = "ColorTypeList"
+        Me.ColorTypeList.Size = New System.Drawing.Size(120, 95)
+        Me.ColorTypeList.TabIndex = 0
         '
-        'Color
+        'ColorList
         '
-        Me.Color.FormattingEnabled = True
-        Me.Color.Location = New System.Drawing.Point(675, 291)
-        Me.Color.Name = "Color"
-        Me.Color.Size = New System.Drawing.Size(120, 95)
-        Me.Color.TabIndex = 0
+        Me.ColorList.FormattingEnabled = True
+        Me.ColorList.Location = New System.Drawing.Point(675, 291)
+        Me.ColorList.Name = "ColorList"
+        Me.ColorList.Size = New System.Drawing.Size(120, 95)
+        Me.ColorList.TabIndex = 0
         '
         'EngineType
         '
@@ -311,13 +311,13 @@ Partial Class Form1
         Me.LoadDbButton.UseVisualStyleBackColor = True
         Me.LoadDbButton.Visible = False
         '
-        'EqType
+        'EqTypeList
         '
-        Me.EqType.FormattingEnabled = True
-        Me.EqType.Location = New System.Drawing.Point(423, 291)
-        Me.EqType.Name = "EqType"
-        Me.EqType.Size = New System.Drawing.Size(120, 95)
-        Me.EqType.TabIndex = 0
+        Me.EqTypeList.FormattingEnabled = True
+        Me.EqTypeList.Location = New System.Drawing.Point(423, 291)
+        Me.EqTypeList.Name = "EqTypeList"
+        Me.EqTypeList.Size = New System.Drawing.Size(120, 95)
+        Me.EqTypeList.TabIndex = 0
         '
         'Label8
         '
@@ -343,10 +343,10 @@ Partial Class Form1
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.EqType)
+        Me.Controls.Add(Me.EqTypeList)
         Me.Controls.Add(Me.EngineType)
-        Me.Controls.Add(Me.Color)
-        Me.Controls.Add(Me.ColorType)
+        Me.Controls.Add(Me.ColorList)
+        Me.Controls.Add(Me.ColorTypeList)
         Me.Controls.Add(Me.ModelList)
         Me.Controls.Add(Me.CarList)
         Me.Name = "Form1"
@@ -362,8 +362,8 @@ Partial Class Form1
 
     Friend WithEvents CarList As ListBox
     Friend WithEvents ModelList As ListBox
-    Friend WithEvents ColorType As ListBox
-    Friend WithEvents Color As ListBox
+    Friend WithEvents ColorTypeList As ListBox
+    Friend WithEvents ColorList As ListBox
     Friend WithEvents EngineType As ListBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
@@ -387,6 +387,6 @@ Partial Class Form1
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents LogoutButton As Button
     Friend WithEvents LoadDbButton As Button
-    Friend WithEvents EqType As ListBox
+    Friend WithEvents EqTypeList As ListBox
     Friend WithEvents Label8 As Label
 End Class
