@@ -48,6 +48,9 @@ Partial Class Form1
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LogoutButton = New System.Windows.Forms.Button()
+        Me.LoadDbButton = New System.Windows.Forms.Button()
+        Me.EqType = New System.Windows.Forms.ListBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -55,7 +58,6 @@ Partial Class Form1
         'CarList
         '
         Me.CarList.FormattingEnabled = True
-        Me.CarList.Items.AddRange(New Object() {"Audi", "Skoda", "Honda", "Porsche", "Chevrolet"})
         Me.CarList.Location = New System.Drawing.Point(45, 291)
         Me.CarList.Name = "CarList"
         Me.CarList.Size = New System.Drawing.Size(120, 95)
@@ -72,7 +74,7 @@ Partial Class Form1
         'ColorType
         '
         Me.ColorType.FormattingEnabled = True
-        Me.ColorType.Location = New System.Drawing.Point(423, 291)
+        Me.ColorType.Location = New System.Drawing.Point(549, 291)
         Me.ColorType.Name = "ColorType"
         Me.ColorType.Size = New System.Drawing.Size(120, 95)
         Me.ColorType.TabIndex = 0
@@ -80,7 +82,7 @@ Partial Class Form1
         'Color
         '
         Me.Color.FormattingEnabled = True
-        Me.Color.Location = New System.Drawing.Point(549, 291)
+        Me.Color.Location = New System.Drawing.Point(675, 291)
         Me.Color.Name = "Color"
         Me.Color.Size = New System.Drawing.Size(120, 95)
         Me.Color.TabIndex = 0
@@ -123,7 +125,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(420, 265)
+        Me.Label4.Location = New System.Drawing.Point(546, 265)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(36, 13)
         Me.Label4.TabIndex = 1
@@ -132,7 +134,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(546, 265)
+        Me.Label5.Location = New System.Drawing.Point(672, 265)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(31, 13)
         Me.Label5.TabIndex = 1
@@ -299,19 +301,48 @@ Partial Class Form1
         Me.LogoutButton.UseVisualStyleBackColor = True
         Me.LogoutButton.Visible = False
         '
+        'LoadDbButton
+        '
+        Me.LoadDbButton.Location = New System.Drawing.Point(45, 401)
+        Me.LoadDbButton.Name = "LoadDbButton"
+        Me.LoadDbButton.Size = New System.Drawing.Size(75, 23)
+        Me.LoadDbButton.TabIndex = 2
+        Me.LoadDbButton.Text = "Wczytaj"
+        Me.LoadDbButton.UseVisualStyleBackColor = True
+        '
+        'EqType
+        '
+        Me.EqType.FormattingEnabled = True
+        Me.EqType.Location = New System.Drawing.Point(423, 291)
+        Me.EqType.Name = "EqType"
+        Me.EqType.Size = New System.Drawing.Size(120, 95)
+        Me.EqType.TabIndex = 0
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(420, 265)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(71, 13)
+        Me.Label8.TabIndex = 1
+        Me.Label8.Text = "Wyposażenie"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1022, 569)
         Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.LoadDbButton)
         Me.Controls.Add(Me.LogoutButton)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.EqType)
         Me.Controls.Add(Me.EngineType)
         Me.Controls.Add(Me.Color)
         Me.Controls.Add(Me.ColorType)
@@ -354,4 +385,7 @@ Partial Class Form1
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents LogoutButton As Button
+    Friend WithEvents LoadDbButton As Button
+    Friend WithEvents EqType As ListBox
+    Friend WithEvents Label8 As Label
 End Class
