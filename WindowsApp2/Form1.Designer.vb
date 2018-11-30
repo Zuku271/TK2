@@ -309,6 +309,7 @@ Partial Class Form1
         Me.LoadDbButton.TabIndex = 2
         Me.LoadDbButton.Text = "Wczytaj"
         Me.LoadDbButton.UseVisualStyleBackColor = True
+        Me.LoadDbButton.Visible = False
         '
         'EqType
         '
