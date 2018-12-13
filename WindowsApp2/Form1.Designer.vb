@@ -24,13 +24,11 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.CarList = New System.Windows.Forms.ListBox()
         Me.ModelList = New System.Windows.Forms.ListBox()
-        Me.ColorTypeList = New System.Windows.Forms.ListBox()
         Me.ColorList = New System.Windows.Forms.ListBox()
         Me.EngineType = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.LoginButton = New System.Windows.Forms.Button()
         Me.LoginBox = New System.Windows.Forms.TextBox()
@@ -71,18 +69,10 @@ Partial Class Form1
         Me.ModelList.Size = New System.Drawing.Size(120, 95)
         Me.ModelList.TabIndex = 0
         '
-        'ColorTypeList
-        '
-        Me.ColorTypeList.FormattingEnabled = True
-        Me.ColorTypeList.Location = New System.Drawing.Point(549, 291)
-        Me.ColorTypeList.Name = "ColorTypeList"
-        Me.ColorTypeList.Size = New System.Drawing.Size(120, 95)
-        Me.ColorTypeList.TabIndex = 0
-        '
         'ColorList
         '
         Me.ColorList.FormattingEnabled = True
-        Me.ColorList.Location = New System.Drawing.Point(675, 291)
+        Me.ColorList.Location = New System.Drawing.Point(549, 291)
         Me.ColorList.Name = "ColorList"
         Me.ColorList.Size = New System.Drawing.Size(120, 95)
         Me.ColorList.TabIndex = 0
@@ -122,19 +112,10 @@ Partial Class Form1
         Me.Label3.TabIndex = 1
         Me.Label3.Text = "Silnik"
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(546, 265)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(36, 13)
-        Me.Label4.TabIndex = 1
-        Me.Label4.Text = "Lakier"
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(672, 265)
+        Me.Label5.Location = New System.Drawing.Point(546, 265)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(31, 13)
         Me.Label5.TabIndex = 1
@@ -338,7 +319,6 @@ Partial Class Form1
         Me.Controls.Add(Me.LogoutButton)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
@@ -346,7 +326,6 @@ Partial Class Form1
         Me.Controls.Add(Me.EqTypeList)
         Me.Controls.Add(Me.EngineType)
         Me.Controls.Add(Me.ColorList)
-        Me.Controls.Add(Me.ColorTypeList)
         Me.Controls.Add(Me.ModelList)
         Me.Controls.Add(Me.CarList)
         Me.Name = "Form1"
@@ -362,13 +341,11 @@ Partial Class Form1
 
     Friend WithEvents CarList As ListBox
     Friend WithEvents ModelList As ListBox
-    Friend WithEvents ColorTypeList As ListBox
     Friend WithEvents ColorList As ListBox
     Friend WithEvents EngineType As ListBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents LoginButton As Button
     Friend WithEvents LoginBox As TextBox

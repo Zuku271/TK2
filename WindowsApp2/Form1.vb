@@ -108,7 +108,6 @@ Public Class Form1
         ModelList.Items.Clear()
         EngineType.Items.Clear()
         ColorList.Items.Clear()
-        ColorTypeList.Items.Clear()
         EqTypeList.Items.Clear()
 
         For Each row In objTabela.Rows
@@ -163,48 +162,25 @@ Public Class Form1
         conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Kody\Git\TK2\WindowsApp2\Database1.mdf;Integrated Security=True;Connect Timeout=30"
         conn.Open()
 
-        Dim sql_Query As New SqlCommand("SELECT EngineType FROM Engines WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
+        Dim sql_Query As New SqlCommand("SELECT CarEq FROM Equipment WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "' AND Engine_ID = '" & EngineType.SelectedIndex & "';")
         Dim dataadapter As New SqlDataAdapter
         Dim ds As New DataSet
         Dim objTabela As New DataTable
 
         dataadapter.SelectCommand = sql_Query
         dataadapter.SelectCommand.Connection = conn
-        dataadapter.Fill(ds, "EngineType")
+        dataadapter.Fill(ds, "CarEq")
 
-        objTabela = ds.Tables("EngineType")
-        EngineType.Items.Clear()
+        objTabela = ds.Tables("CarEq")
+        EqTypeList.Items.Clear()
 
         For Each row In objTabela.Rows
-            EngineType.Items.Add(row("EngineType"))
+            EqTypeList.Items.Add(row("CarEq"))
         Next row
         conn.Close()
     End Sub
 
-    Private Sub ColorTypeList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ColorTypeList.SelectedIndexChanged
-        EngineType.Items.Clear()
-        EqTypeList.Items.Clear()
+    Private Sub ColorList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ColorList.SelectedIndexChanged
 
-        Dim conn As SqlConnection
-        conn = New SqlConnection
-
-        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Kody\Git\TK2\WindowsApp2\Database1.mdf;Integrated Security=True;Connect Timeout=30"
-        conn.Open()
-
-        Dim getEngineType_query As New SqlCommand("SELECT EngineType FROM Engines WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
-        Dim getEqTypeList_query As New SqlCommand("SELECT CarEq FROM Equipment WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
-        Dim getColorType_query As New SqlCommand("SELECT ColorType FROM Colors WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
-        Dim dataadapter As New SqlDataAdapter
-        Dim ds As New DataSet
-        Dim objTabela As New DataTable
-
-        dataadapter.SelectCommand = getEngineType_query
-        dataadapter.SelectCommand.Connection = conn
-        dataadapter.Fill(ds, "EngineType")
-        objTabela = ds.Tables("EngineType")
-        For Each row In objTabela.Rows
-            EngineType.Items.Add(row("EngineType"))
-        Next row
-        conn.Close()
     End Sub
 End Class
