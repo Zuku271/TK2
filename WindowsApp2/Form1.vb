@@ -10,13 +10,16 @@ Public Class Form1
     'Private ds_Engines As DataSet
     'Private ds_Colors As DataSet
     'Private ds_Equipment As DataSet
-    '
+    Private DBPath As String
 
     Public Sub New()
         InitializeComponent()
+
+        DBPath = "D:\Kody\Git\TK2\WindowsApp2\Database1.mdf"
+
         Dim conn As SqlConnection
         conn = New SqlConnection
-        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Kody\Git\TK2\WindowsApp2\Database1.mdf;Integrated Security=True;Connect Timeout=30"
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
         conn.Open()
 
         Dim dataadapter As SqlDataAdapter
@@ -53,7 +56,7 @@ Public Class Form1
 
         Dim conn As SqlConnection
         conn = New SqlConnection
-        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Kody\Git\TK2\WindowsApp2\Database1.mdf;Integrated Security=True;Connect Timeout=30"
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
         conn.Open()
 
         dataadapter = New SqlDataAdapter
@@ -89,13 +92,147 @@ Public Class Form1
     End Sub
 
     Private Sub CarList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CarList.SelectedIndexChanged
+        reload()
+    End Sub
+
+    Private Sub ModelList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ModelList.SelectedIndexChanged
+
+        EngineType.Items.Clear()
+        EqTypeList.Items.Clear()
+        ColorList.Items.Clear()
+
         Dim conn As SqlConnection
         conn = New SqlConnection
 
-        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Kody\Git\TK2\WindowsApp2\Database1.mdf;Integrated Security=True;Connect Timeout=30"
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
         conn.Open()
 
-        Dim sql_Query As New SqlCommand("SELECT ModelName FROM MODELS WHERE Brand_ID = '" & CarList.SelectedIndex & "';")
+        Dim getEngineType_query As New SqlCommand("SELECT EngineType FROM Engines WHERE 
+            Brand_ID = (SELECT Brand_ID FROM Brands WHERE BrandName = '" & CarList.SelectedItem & "') AND
+            Model_ID = (SELECT Model_ID FROM Models WHERE ModelName = '" & ModelList.SelectedItem & "')")
+        'Dim getEqTypeList_query As New SqlCommand("SELECT CarEq FROM Equipment WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
+        'Dim getColorType_query As New SqlCommand("SELECT ColorType FROM Colors WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
+        Dim dataadapter As New SqlDataAdapter
+        Dim ds As New DataSet
+        Dim objTabela As New DataTable
+
+        dataadapter.SelectCommand = getEngineType_query
+        dataadapter.SelectCommand.Connection = conn
+        dataadapter.Fill(ds, "EngineType")
+        objTabela = ds.Tables("EngineType")
+        For Each row In objTabela.Rows
+            EngineType.Items.Add(row("EngineType"))
+        Next row
+
+        'dataadapter.SelectCommand = getEqTypeList_query
+        'dataadapter.SelectCommand.Connection = conn
+        'dataadapter.Fill(ds, "CarEq")
+        'objTabela = ds.Tables("CarEq")
+        'For Each row In objTabela.Rows
+        'EqTypeList.Items.Add(row("CarEq"))
+        'Next row
+
+
+
+        conn.Close()
+    End Sub
+
+    Private Sub EngineType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles EngineType.SelectedIndexChanged
+        Dim conn As SqlConnection
+        conn = New SqlConnection
+
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
+        conn.Open()
+
+        Dim sql_Query As New SqlCommand("SELECT C.CarEq FROM Equipment C, Brands B, Models M, Engines E
+            WHERE C.Brand_ID = B.Brand_ID
+            AND C.Model_ID = M.Model_ID
+            AND C.Engine_ID = E.Engine_ID")
+        Dim dataadapter As New SqlDataAdapter
+        Dim ds As New DataSet
+        Dim objTabela As New DataTable
+
+        dataadapter.SelectCommand = sql_Query
+        dataadapter.SelectCommand.Connection = conn
+        dataadapter.Fill(ds, "CarEq")
+
+        objTabela = ds.Tables("CarEq")
+        EqTypeList.Items.Clear()
+
+        For Each row In objTabela.Rows
+            EqTypeList.Items.Add(row("CarEq"))
+        Next row
+        conn.Close()
+    End Sub
+
+    Private Sub EqTypeList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles EqTypeList.SelectedIndexChanged
+        Dim conn As SqlConnection
+        conn = New SqlConnection
+
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
+        conn.Open()
+
+        Dim sql_Query As New SqlCommand("SELECT C.Color, C.ColorType FROM Colors C, Brands B, Models M, Equipment E
+            WHERE C.Brand_ID = B.Brand_ID
+            AND C.Model_ID = M.Model_ID
+            AND C.Eq_ID = E.Eq_ID")
+        Dim dataAdapter As New SqlDataAdapter
+        Dim ds_Color As New DataSet
+        Dim ds_ColorType As New DataSet
+        Dim objTabela As New DataTable
+        Dim dt_ColorType As New DataTable
+
+        dataAdapter.SelectCommand = sql_Query
+        dataAdapter.SelectCommand.Connection = conn
+        dataAdapter.Fill(ds_Color, "Color")
+        dataAdapter.Fill(ds_ColorType, "ColorType")
+
+        objTabela = ds_Color.Tables("Color")
+        dt_ColorType = ds_ColorType.Tables("ColorType")
+        ColorList.Items.Clear()
+
+        Dim j As Int16
+        j = 0
+        For Each row In objTabela.Rows
+            ColorList.Items.Add(row("Color") & " (" & dt_ColorType.Rows.Item(j).Item(1) & ")")
+            j = j + 1
+        Next row
+        conn.Close()
+    End Sub
+
+    Private Sub ColorList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ColorList.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'Dim fileName As String
+        Dim filePath As String
+        Dim OpenFile As OpenFileDialog = New OpenFileDialog()
+
+        OpenFile.InitialDirectory = "D:"
+        OpenFile.Filter = "mdf files (*.mdf)|*.mdf|All files (*.*)|*.*"
+        OpenFile.FilterIndex = 2
+        OpenFile.RestoreDirectory = True
+
+        If OpenFile.ShowDialog() = DialogResult.OK Then
+
+            'Get the path of specified file
+            filePath = OpenFile.FileName
+            DBName.Text = OpenFile.FileName
+            DBPath = filePath
+            reload()
+        End If
+    End Sub
+
+    Private Function reload()
+        Dim conn As SqlConnection
+        conn = New SqlConnection
+
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
+        conn.Open()
+
+        Dim sql_Query As New SqlCommand("SELECT ModelName FROM Models WHERE Brand_ID =
+            (SELECT Brand_ID FROM Brands WHERE BrandName = '" & CarList.SelectedItem & "')")
         Dim dataadapter As New SqlDataAdapter
         Dim ds As New DataSet
         Dim objTabela As New DataTable
@@ -114,73 +251,5 @@ Public Class Form1
             ModelList.Items.Add(row("ModelName"))
         Next row
         conn.Close()
-    End Sub
-
-    Private Sub ModelList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ModelList.SelectedIndexChanged
-
-        EngineType.Items.Clear()
-        EqTypeList.Items.Clear()
-
-        Dim conn As SqlConnection
-        conn = New SqlConnection
-
-        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Kody\Git\TK2\WindowsApp2\Database1.mdf;Integrated Security=True;Connect Timeout=30"
-        conn.Open()
-
-        Dim getEngineType_query As New SqlCommand("SELECT EngineType FROM Engines WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
-        Dim getEqTypeList_query As New SqlCommand("SELECT CarEq FROM Equipment WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
-        Dim getColorType_query As New SqlCommand("SELECT ColorType FROM Colors WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
-        Dim dataadapter As New SqlDataAdapter
-        Dim ds As New DataSet
-        Dim objTabela As New DataTable
-
-        dataadapter.SelectCommand = getEngineType_query
-        dataadapter.SelectCommand.Connection = conn
-        dataadapter.Fill(ds, "EngineType")
-        objTabela = ds.Tables("EngineType")
-        For Each row In objTabela.Rows
-            EngineType.Items.Add(row("EngineType"))
-        Next row
-
-        dataadapter.SelectCommand = getEqTypeList_query
-        dataadapter.SelectCommand.Connection = conn
-        dataadapter.Fill(ds, "CarEq")
-        objTabela = ds.Tables("CarEq")
-        For Each row In objTabela.Rows
-            EqTypeList.Items.Add(row("CarEq"))
-        Next row
-
-
-
-        conn.Close()
-    End Sub
-
-    Private Sub EngineType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles EngineType.SelectedIndexChanged
-        Dim conn As SqlConnection
-        conn = New SqlConnection
-
-        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Kody\Git\TK2\WindowsApp2\Database1.mdf;Integrated Security=True;Connect Timeout=30"
-        conn.Open()
-
-        Dim sql_Query As New SqlCommand("SELECT CarEq FROM Equipment WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "' AND Engine_ID = '" & EngineType.SelectedIndex & "';")
-        Dim dataadapter As New SqlDataAdapter
-        Dim ds As New DataSet
-        Dim objTabela As New DataTable
-
-        dataadapter.SelectCommand = sql_Query
-        dataadapter.SelectCommand.Connection = conn
-        dataadapter.Fill(ds, "CarEq")
-
-        objTabela = ds.Tables("CarEq")
-        EqTypeList.Items.Clear()
-
-        For Each row In objTabela.Rows
-            EqTypeList.Items.Add(row("CarEq"))
-        Next row
-        conn.Close()
-    End Sub
-
-    Private Sub ColorList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ColorList.SelectedIndexChanged
-
-    End Sub
+    End Function
 End Class

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.CarList = New System.Windows.Forms.ListBox()
         Me.ModelList = New System.Windows.Forms.ListBox()
@@ -49,8 +49,12 @@ Partial Class Form1
         Me.LoadDbButton = New System.Windows.Forms.Button()
         Me.EqTypeList = New System.Windows.Forms.ListBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.ChangeDB = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.DBName = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.ChangeDB.SuspendLayout()
         Me.SuspendLayout()
         '
         'CarList
@@ -309,11 +313,40 @@ Partial Class Form1
         Me.Label8.TabIndex = 1
         Me.Label8.Text = "Wyposażenie"
         '
+        'ChangeDB
+        '
+        Me.ChangeDB.Controls.Add(Me.Button1)
+        Me.ChangeDB.Controls.Add(Me.DBName)
+        Me.ChangeDB.Location = New System.Drawing.Point(45, 457)
+        Me.ChangeDB.Name = "ChangeDB"
+        Me.ChangeDB.Size = New System.Drawing.Size(624, 100)
+        Me.ChangeDB.TabIndex = 10
+        Me.ChangeDB.TabStop = False
+        Me.ChangeDB.Text = "Zmiana komisu"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(6, 57)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "Zmień"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'DBName
+        '
+        Me.DBName.Location = New System.Drawing.Point(6, 24)
+        Me.DBName.Name = "DBName"
+        Me.DBName.Size = New System.Drawing.Size(612, 20)
+        Me.DBName.TabIndex = 3
+        Me.DBName.Text = "D:\Kody\Git\TK2\WindowsApp2\Database1.mdf"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1022, 569)
+        Me.Controls.Add(Me.ChangeDB)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.LoadDbButton)
         Me.Controls.Add(Me.LogoutButton)
@@ -334,6 +367,8 @@ Partial Class Form1
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.ChangeDB.ResumeLayout(False)
+        Me.ChangeDB.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -366,4 +401,7 @@ Partial Class Form1
     Friend WithEvents LoadDbButton As Button
     Friend WithEvents EqTypeList As ListBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents ChangeDB As GroupBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents DBName As TextBox
 End Class
