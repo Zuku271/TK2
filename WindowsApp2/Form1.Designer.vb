@@ -39,7 +39,6 @@ Partial Class Form1
         Me.AddNewItemBox = New System.Windows.Forms.TextBox()
         Me.AddNewItemButton = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.LogoutButton = New System.Windows.Forms.Button()
         Me.LoadDbButton = New System.Windows.Forms.Button()
         Me.EqTypeList = New System.Windows.Forms.ListBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -215,16 +214,6 @@ Partial Class Form1
         Me.GroupBox1.Text = "Dodawanie danych"
         Me.GroupBox1.Visible = False
         '
-        'LogoutButton
-        '
-        Me.LogoutButton.Location = New System.Drawing.Point(129, 39)
-        Me.LogoutButton.Name = "LogoutButton"
-        Me.LogoutButton.Size = New System.Drawing.Size(75, 23)
-        Me.LogoutButton.TabIndex = 2
-        Me.LogoutButton.Text = "Wyloguj"
-        Me.LogoutButton.UseVisualStyleBackColor = True
-        Me.LogoutButton.Visible = False
-        '
         'LoadDbButton
         '
         Me.LoadDbButton.Location = New System.Drawing.Point(45, 401)
@@ -297,7 +286,6 @@ Partial Class Form1
         Me.Controls.Add(Me.LoginFormButton)
         Me.Controls.Add(Me.ChangeDB)
         Me.Controls.Add(Me.LoadDbButton)
-        Me.Controls.Add(Me.LogoutButton)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label8)
@@ -337,7 +325,6 @@ Partial Class Form1
     Friend WithEvents AddNewItemBox As TextBox
     Friend WithEvents AddNewItemButton As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents LogoutButton As Button
     Friend WithEvents LoadDbButton As Button
     Friend WithEvents EqTypeList As ListBox
     Friend WithEvents Label8 As Label

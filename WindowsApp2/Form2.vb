@@ -12,12 +12,12 @@ Public Class Form2
 
     End Sub
 
-    Private Sub LoginButton_Click(sender As Object, e As EventArgs)
+    Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
         Dim objTabela As DataTable
         Dim dataset As DataSet
         Dim dataadapter As SqlDataAdapter
-        Dim sql_Command As New SqlCommand("SELECT * FROM Users WHERE Login='" & LoginBox.Text & "' AND Password='" & PasswordBox.Text & "';")
+        Dim sql_Command As New SqlCommand("SELECT * FROM Users WHERE Login='" & LoginTextBox.Text & "' AND Password='" & PasswordTextBox.Text & "';")
 
 
         Dim conn As SqlConnection
@@ -35,18 +35,31 @@ Public Class Form2
         objTabela = dataset.Tables("Users")
 
         If objTabela.Rows.Count = 1 Then
-            'MsgBox("Zalogowano !")
-            'GroupBox1.Visible = True
-            LoginButton.Visible = False
-            ' LogoutButton.Visible = True
-            GroupBox2.Visible = False
+            LoginName.Text = objTabela.Rows.Item(0)("Login")
+            Label1.Show()
+            LoginName.Show()
+            GroupBox2.Hide()
+            LogoutButton.Show()
 
-            LoginBox.Clear()
-            PasswordBox.Clear()
+            LoginTextBox.Clear()
+            PasswordTextBox.Clear()
         Else
             MsgBox("Niepoprawne dane.")
         End If
         conn.Close()
+    End Sub
 
+    Private Sub LogoutButton_Click(sender As Object, e As EventArgs) Handles LogoutButton.Click
+        Label1.Hide()
+        LoginName.Hide()
+        SaveButton.Show()
+        GroupBox2.Show()
+        LogoutButton.Hide()
+
+
+    End Sub
+
+    Private Sub Form2_Closed(sender As Object, e As EventArgs) Handles Me.Closing
+        Form1.LoginFormButton.Show()
     End Sub
 End Class
