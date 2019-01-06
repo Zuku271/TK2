@@ -30,11 +30,6 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.LoginButton = New System.Windows.Forms.Button()
-        Me.LoginBox = New System.Windows.Forms.TextBox()
-        Me.PasswordBox = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
@@ -44,7 +39,6 @@ Partial Class Form1
         Me.AddNewItemBox = New System.Windows.Forms.TextBox()
         Me.AddNewItemButton = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LogoutButton = New System.Windows.Forms.Button()
         Me.LoadDbButton = New System.Windows.Forms.Button()
         Me.EqTypeList = New System.Windows.Forms.ListBox()
@@ -52,8 +46,8 @@ Partial Class Form1
         Me.ChangeDB = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.DBName = New System.Windows.Forms.TextBox()
+        Me.LoginFormButton = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.ChangeDB.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -124,47 +118,6 @@ Partial Class Form1
         Me.Label5.Size = New System.Drawing.Size(31, 13)
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "Kolor"
-        '
-        'LoginButton
-        '
-        Me.LoginButton.Location = New System.Drawing.Point(50, 93)
-        Me.LoginButton.Name = "LoginButton"
-        Me.LoginButton.Size = New System.Drawing.Size(75, 23)
-        Me.LoginButton.TabIndex = 2
-        Me.LoginButton.Text = "OK"
-        Me.LoginButton.UseVisualStyleBackColor = True
-        '
-        'LoginBox
-        '
-        Me.LoginBox.Location = New System.Drawing.Point(50, 23)
-        Me.LoginBox.Name = "LoginBox"
-        Me.LoginBox.Size = New System.Drawing.Size(156, 20)
-        Me.LoginBox.TabIndex = 3
-        '
-        'PasswordBox
-        '
-        Me.PasswordBox.Location = New System.Drawing.Point(50, 54)
-        Me.PasswordBox.Name = "PasswordBox"
-        Me.PasswordBox.Size = New System.Drawing.Size(156, 20)
-        Me.PasswordBox.TabIndex = 3
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(8, 23)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(36, 13)
-        Me.Label6.TabIndex = 4
-        Me.Label6.Text = "Login:"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(8, 57)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(39, 13)
-        Me.Label7.TabIndex = 5
-        Me.Label7.Text = "Hasło:"
         '
         'RadioButton1
         '
@@ -262,23 +215,9 @@ Partial Class Form1
         Me.GroupBox1.Text = "Dodawanie danych"
         Me.GroupBox1.Visible = False
         '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.PasswordBox)
-        Me.GroupBox2.Controls.Add(Me.LoginButton)
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.LoginBox)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Location = New System.Drawing.Point(45, 26)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(218, 131)
-        Me.GroupBox2.TabIndex = 9
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Logowanie"
-        '
         'LogoutButton
         '
-        Me.LogoutButton.Location = New System.Drawing.Point(269, 39)
+        Me.LogoutButton.Location = New System.Drawing.Point(129, 39)
         Me.LogoutButton.Name = "LogoutButton"
         Me.LogoutButton.Size = New System.Drawing.Size(75, 23)
         Me.LogoutButton.TabIndex = 2
@@ -341,13 +280,22 @@ Partial Class Form1
         Me.DBName.TabIndex = 3
         Me.DBName.Text = "D:\Kody\Git\TK2\WindowsApp2\Database1.mdf"
         '
+        'LoginFormButton
+        '
+        Me.LoginFormButton.Location = New System.Drawing.Point(45, 39)
+        Me.LoginFormButton.Name = "LoginFormButton"
+        Me.LoginFormButton.Size = New System.Drawing.Size(75, 23)
+        Me.LoginFormButton.TabIndex = 11
+        Me.LoginFormButton.Text = "Logowanie"
+        Me.LoginFormButton.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1022, 569)
+        Me.Controls.Add(Me.LoginFormButton)
         Me.Controls.Add(Me.ChangeDB)
-        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.LoadDbButton)
         Me.Controls.Add(Me.LogoutButton)
         Me.Controls.Add(Me.GroupBox1)
@@ -365,8 +313,6 @@ Partial Class Form1
         Me.Text = "Form1"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.ChangeDB.ResumeLayout(False)
         Me.ChangeDB.PerformLayout()
         Me.ResumeLayout(False)
@@ -382,11 +328,6 @@ Partial Class Form1
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents LoginButton As Button
-    Friend WithEvents LoginBox As TextBox
-    Friend WithEvents PasswordBox As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
     Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents RadioButton2 As RadioButton
     Friend WithEvents RadioButton3 As RadioButton
@@ -396,7 +337,6 @@ Partial Class Form1
     Friend WithEvents AddNewItemBox As TextBox
     Friend WithEvents AddNewItemButton As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents LogoutButton As Button
     Friend WithEvents LoadDbButton As Button
     Friend WithEvents EqTypeList As ListBox
@@ -404,4 +344,5 @@ Partial Class Form1
     Friend WithEvents ChangeDB As GroupBox
     Friend WithEvents Button1 As Button
     Friend WithEvents DBName As TextBox
+    Friend WithEvents LoginFormButton As Button
 End Class
