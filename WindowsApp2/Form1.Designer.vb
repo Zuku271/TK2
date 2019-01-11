@@ -30,12 +30,11 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
+        Me.BrandRadioButton = New System.Windows.Forms.RadioButton()
+        Me.ModelRadioButton = New System.Windows.Forms.RadioButton()
+        Me.EngineRadioButton = New System.Windows.Forms.RadioButton()
+        Me.EqRadioButton = New System.Windows.Forms.RadioButton()
+        Me.ColorRadioButton = New System.Windows.Forms.RadioButton()
         Me.AddNewItemBox = New System.Windows.Forms.TextBox()
         Me.AddNewItemButton = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -46,6 +45,7 @@ Partial Class Form1
         Me.Button1 = New System.Windows.Forms.Button()
         Me.DBName = New System.Windows.Forms.TextBox()
         Me.LoginFormButton = New System.Windows.Forms.Button()
+        Me.LogoutButton = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.ChangeDB.SuspendLayout()
         Me.SuspendLayout()
@@ -118,73 +118,63 @@ Partial Class Form1
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "Kolor"
         '
-        'RadioButton1
+        'BrandRadioButton
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Checked = True
-        Me.RadioButton1.Location = New System.Drawing.Point(226, 38)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(55, 17)
-        Me.RadioButton1.TabIndex = 6
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Marka"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.BrandRadioButton.AutoSize = True
+        Me.BrandRadioButton.Checked = True
+        Me.BrandRadioButton.Location = New System.Drawing.Point(226, 38)
+        Me.BrandRadioButton.Name = "BrandRadioButton"
+        Me.BrandRadioButton.Size = New System.Drawing.Size(55, 17)
+        Me.BrandRadioButton.TabIndex = 6
+        Me.BrandRadioButton.TabStop = True
+        Me.BrandRadioButton.Text = "Marka"
+        Me.BrandRadioButton.UseVisualStyleBackColor = True
         '
-        'RadioButton2
+        'ModelRadioButton
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(226, 61)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(54, 17)
-        Me.RadioButton2.TabIndex = 6
-        Me.RadioButton2.Text = "Model"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.ModelRadioButton.AutoSize = True
+        Me.ModelRadioButton.Location = New System.Drawing.Point(226, 61)
+        Me.ModelRadioButton.Name = "ModelRadioButton"
+        Me.ModelRadioButton.Size = New System.Drawing.Size(54, 17)
+        Me.ModelRadioButton.TabIndex = 6
+        Me.ModelRadioButton.Text = "Model"
+        Me.ModelRadioButton.UseVisualStyleBackColor = True
         '
-        'RadioButton3
+        'EngineRadioButton
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(226, 84)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(50, 17)
-        Me.RadioButton3.TabIndex = 6
-        Me.RadioButton3.Text = "Silnik"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.EngineRadioButton.AutoSize = True
+        Me.EngineRadioButton.Location = New System.Drawing.Point(226, 84)
+        Me.EngineRadioButton.Name = "EngineRadioButton"
+        Me.EngineRadioButton.Size = New System.Drawing.Size(50, 17)
+        Me.EngineRadioButton.TabIndex = 6
+        Me.EngineRadioButton.Text = "Silnik"
+        Me.EngineRadioButton.UseVisualStyleBackColor = True
         '
-        'RadioButton4
+        'EqRadioButton
         '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Location = New System.Drawing.Point(226, 107)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(89, 17)
-        Me.RadioButton4.TabIndex = 6
-        Me.RadioButton4.Text = "Wyposażenie"
-        Me.RadioButton4.UseVisualStyleBackColor = True
+        Me.EqRadioButton.AutoSize = True
+        Me.EqRadioButton.Location = New System.Drawing.Point(226, 107)
+        Me.EqRadioButton.Name = "EqRadioButton"
+        Me.EqRadioButton.Size = New System.Drawing.Size(89, 17)
+        Me.EqRadioButton.TabIndex = 6
+        Me.EqRadioButton.Text = "Wyposażenie"
+        Me.EqRadioButton.UseVisualStyleBackColor = True
         '
-        'RadioButton5
+        'ColorRadioButton
         '
-        Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.Location = New System.Drawing.Point(226, 130)
-        Me.RadioButton5.Name = "RadioButton5"
-        Me.RadioButton5.Size = New System.Drawing.Size(54, 17)
-        Me.RadioButton5.TabIndex = 6
-        Me.RadioButton5.Text = "Lakier"
-        Me.RadioButton5.UseVisualStyleBackColor = True
-        '
-        'RadioButton6
-        '
-        Me.RadioButton6.AutoSize = True
-        Me.RadioButton6.Location = New System.Drawing.Point(226, 153)
-        Me.RadioButton6.Name = "RadioButton6"
-        Me.RadioButton6.Size = New System.Drawing.Size(49, 17)
-        Me.RadioButton6.TabIndex = 6
-        Me.RadioButton6.Text = "Kolor"
-        Me.RadioButton6.UseVisualStyleBackColor = True
+        Me.ColorRadioButton.AutoSize = True
+        Me.ColorRadioButton.Location = New System.Drawing.Point(226, 130)
+        Me.ColorRadioButton.Name = "ColorRadioButton"
+        Me.ColorRadioButton.Size = New System.Drawing.Size(49, 17)
+        Me.ColorRadioButton.TabIndex = 6
+        Me.ColorRadioButton.Text = "Kolor"
+        Me.ColorRadioButton.UseVisualStyleBackColor = True
         '
         'AddNewItemBox
         '
         Me.AddNewItemBox.Location = New System.Drawing.Point(10, 38)
         Me.AddNewItemBox.Name = "AddNewItemBox"
-        Me.AddNewItemBox.Size = New System.Drawing.Size(139, 20)
+        Me.AddNewItemBox.Size = New System.Drawing.Size(183, 20)
         Me.AddNewItemBox.TabIndex = 3
         '
         'AddNewItemButton
@@ -200,15 +190,14 @@ Partial Class Form1
         '
         Me.GroupBox1.Controls.Add(Me.AddNewItemButton)
         Me.GroupBox1.Controls.Add(Me.AddNewItemBox)
-        Me.GroupBox1.Controls.Add(Me.RadioButton6)
-        Me.GroupBox1.Controls.Add(Me.RadioButton1)
-        Me.GroupBox1.Controls.Add(Me.RadioButton5)
-        Me.GroupBox1.Controls.Add(Me.RadioButton2)
-        Me.GroupBox1.Controls.Add(Me.RadioButton4)
-        Me.GroupBox1.Controls.Add(Me.RadioButton3)
-        Me.GroupBox1.Location = New System.Drawing.Point(600, 26)
+        Me.GroupBox1.Controls.Add(Me.ColorRadioButton)
+        Me.GroupBox1.Controls.Add(Me.BrandRadioButton)
+        Me.GroupBox1.Controls.Add(Me.ModelRadioButton)
+        Me.GroupBox1.Controls.Add(Me.EqRadioButton)
+        Me.GroupBox1.Controls.Add(Me.EngineRadioButton)
+        Me.GroupBox1.Location = New System.Drawing.Point(171, 30)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(399, 222)
+        Me.GroupBox1.Size = New System.Drawing.Size(372, 222)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Dodawanie danych"
@@ -278,11 +267,22 @@ Partial Class Form1
         Me.LoginFormButton.Text = "Logowanie"
         Me.LoginFormButton.UseVisualStyleBackColor = True
         '
+        'LogoutButton
+        '
+        Me.LogoutButton.Location = New System.Drawing.Point(45, 68)
+        Me.LogoutButton.Name = "LogoutButton"
+        Me.LogoutButton.Size = New System.Drawing.Size(75, 23)
+        Me.LogoutButton.TabIndex = 11
+        Me.LogoutButton.Text = "Wyloguj"
+        Me.LogoutButton.UseVisualStyleBackColor = True
+        Me.LogoutButton.Visible = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1022, 569)
+        Me.ClientSize = New System.Drawing.Size(1044, 562)
+        Me.Controls.Add(Me.LogoutButton)
         Me.Controls.Add(Me.LoginFormButton)
         Me.Controls.Add(Me.ChangeDB)
         Me.Controls.Add(Me.LoadDbButton)
@@ -297,6 +297,9 @@ Partial Class Form1
         Me.Controls.Add(Me.ColorList)
         Me.Controls.Add(Me.ModelList)
         Me.Controls.Add(Me.CarList)
+        Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(1060, 600)
+        Me.MinimumSize = New System.Drawing.Size(1060, 600)
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.GroupBox1.ResumeLayout(False)
@@ -316,12 +319,11 @@ Partial Class Form1
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents RadioButton1 As RadioButton
-    Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents RadioButton4 As RadioButton
-    Friend WithEvents RadioButton5 As RadioButton
-    Friend WithEvents RadioButton6 As RadioButton
+    Friend WithEvents BrandRadioButton As RadioButton
+    Friend WithEvents ModelRadioButton As RadioButton
+    Friend WithEvents EngineRadioButton As RadioButton
+    Friend WithEvents EqRadioButton As RadioButton
+    Friend WithEvents ColorRadioButton As RadioButton
     Friend WithEvents AddNewItemBox As TextBox
     Friend WithEvents AddNewItemButton As Button
     Friend WithEvents GroupBox1 As GroupBox
@@ -332,4 +334,5 @@ Partial Class Form1
     Friend WithEvents Button1 As Button
     Friend WithEvents DBName As TextBox
     Friend WithEvents LoginFormButton As Button
+    Friend WithEvents LogoutButton As Button
 End Class

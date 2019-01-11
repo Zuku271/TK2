@@ -12,6 +12,8 @@ Public Class Form2
 
     End Sub
 
+
+
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
         Dim objTabela As DataTable
@@ -35,31 +37,14 @@ Public Class Form2
         objTabela = dataset.Tables("Users")
 
         If objTabela.Rows.Count = 1 Then
-            LoginName.Text = objTabela.Rows.Item(0)("Login")
-            Label1.Show()
-            LoginName.Show()
-            GroupBox2.Hide()
-            LogoutButton.Show()
+            Label1.Text = "Granted"
+            'LoginTextBox.Clear()
+            'PasswordTextBox.Clear()
 
-            LoginTextBox.Clear()
-            PasswordTextBox.Clear()
         Else
             MsgBox("Niepoprawne dane.")
         End If
         conn.Close()
     End Sub
 
-    Private Sub LogoutButton_Click(sender As Object, e As EventArgs) Handles LogoutButton.Click
-        Label1.Hide()
-        LoginName.Hide()
-        SaveButton.Show()
-        GroupBox2.Show()
-        LogoutButton.Hide()
-
-
-    End Sub
-
-    Private Sub Form2_Closed(sender As Object, e As EventArgs) Handles Me.Closing
-        Form1.LoginFormButton.Show()
-    End Sub
 End Class

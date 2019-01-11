@@ -216,12 +216,70 @@ Public Class Form1
 
     Private Sub LoginFormButton_Click(sender As Object, e As EventArgs) Handles LoginFormButton.Click
 
-        LoginFormButton.Hide()
+        LoginFormButton.Enabled = False
         Dim LoginForm As New Form2(DBPath)
-        LoginForm.Show()
+        If LoginForm.ShowDialog = DialogResult.OK And LoginForm.Label1.Text = "Granted" Then
+            GroupBox1.Show()
+            LoginFormButton.Hide()
+            LogoutButton.Show()
+        Else
+            LoginFormButton.Enabled = True
+        End If
 
 
     End Sub
 
+    Private Sub AddNewItemButton_Click(sender As Object, e As EventArgs) Handles AddNewItemButton.Click
+        If AddNewItemBox.Text <> "" Then
+            Dim conn As New SqlConnection
+            conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
 
+            conn.Open()
+            Dim da As New SqlDataAdapter
+            Dim ds As New DataSet
+
+            da.SelectCommand = New SqlCommand("SELECT * FROM Brands")
+            da.InsertCommand = New SqlCommand("INSERT INTO Brands (BrandName) VALUES ('" & AddNewItemBox.Text & "')")
+            da.SelectCommand.Connection = conn
+            da.InsertCommand.Connection = conn
+
+            If BrandRadioButton.Checked = True Then
+                da.Fill(ds, "Brands")
+                Dim dt As DataTable = ds.Tables("Brands")
+
+                Dim newRow As DataRow
+                newRow = dt.NewRow()
+                'newRow("Brand_ID") = ""
+                newRow("BrandName") = AddNewItemBox.Text
+                dt.Rows.Add(newRow)
+                da.Update(ds, "Brands")
+                'query()
+            ElseIf ModelRadioButton.Checked = True Then
+
+            End If
+        End If
+    End Sub
+
+    Private Sub LogoutButton_Click(sender As Object, e As EventArgs) Handles LogoutButton.Click
+        LoginFormButton.Enabled = True
+        LoginFormButton.Show()
+        LogoutButton.Hide()
+        GroupBox1.Hide()
+    End Sub
+
+    Private Function query(sqlQuery As String)
+        Dim conn As New SqlConnection
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
+        conn.Open()
+
+        Dim _query As New SqlCommand(sqlQuery)
+
+        Dim dataadapter As New SqlDataAdapter
+        Dim ds As New DataSet
+        Dim objTabela As New DataTable
+
+        dataadapter.SelectCommand = _query
+        dataadapter.SelectCommand.Connection = conn
+        Return 1
+    End Function
 End Class

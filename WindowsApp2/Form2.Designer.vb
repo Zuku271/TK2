@@ -28,10 +28,10 @@ Partial Class Form2
         Me.Label7 = New System.Windows.Forms.Label()
         Me.LoginTextBox = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.EventLog1 = New System.Diagnostics.EventLog()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.LoginName = New System.Windows.Forms.Label()
-        Me.LogoutButton = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox2
@@ -41,15 +41,16 @@ Partial Class Form2
         Me.GroupBox2.Controls.Add(Me.Label7)
         Me.GroupBox2.Controls.Add(Me.LoginTextBox)
         Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Location = New System.Drawing.Point(291, 160)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 19)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(218, 131)
+        Me.GroupBox2.Size = New System.Drawing.Size(220, 131)
         Me.GroupBox2.TabIndex = 10
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Logowanie"
         '
         'SaveButton
         '
+        Me.SaveButton.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.SaveButton.Location = New System.Drawing.Point(50, 92)
         Me.SaveButton.Name = "SaveButton"
         Me.SaveButton.Size = New System.Drawing.Size(75, 23)
@@ -90,53 +91,35 @@ Partial Class Form2
         Me.Label6.TabIndex = 4
         Me.Label6.Text = "Login:"
         '
+        'EventLog1
+        '
+        Me.EventLog1.SynchronizingObject = Me
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Location = New System.Drawing.Point(23, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(91, 13)
+        Me.Label1.Size = New System.Drawing.Size(64, 13)
         Me.Label1.TabIndex = 11
-        Me.Label1.Text = "Zalogowany jako:"
+        Me.Label1.Text = "SecretLabel"
         Me.Label1.Visible = False
-        '
-        'LoginName
-        '
-        Me.LoginName.AutoSize = True
-        Me.LoginName.Location = New System.Drawing.Point(109, 9)
-        Me.LoginName.Name = "LoginName"
-        Me.LoginName.Size = New System.Drawing.Size(35, 13)
-        Me.LoginName.TabIndex = 11
-        Me.LoginName.Text = "Name"
-        Me.LoginName.Visible = False
-        '
-        'LogoutButton
-        '
-        Me.LogoutButton.Location = New System.Drawing.Point(15, 25)
-        Me.LogoutButton.Name = "LogoutButton"
-        Me.LogoutButton.Size = New System.Drawing.Size(75, 23)
-        Me.LogoutButton.TabIndex = 6
-        Me.LogoutButton.Text = "Wyloguj"
-        Me.LogoutButton.UseVisualStyleBackColor = True
-        Me.LogoutButton.Visible = False
         '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 462)
-        Me.Controls.Add(Me.LogoutButton)
-        Me.Controls.Add(Me.LoginName)
+        Me.ClientSize = New System.Drawing.Size(244, 162)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.GroupBox2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(1000, 500)
-        Me.MinimumSize = New System.Drawing.Size(1000, 500)
         Me.Name = "Form2"
         Me.Text = "Form2"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -148,7 +131,6 @@ Partial Class Form2
     Friend WithEvents LoginTextBox As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents SaveButton As Button
+    Friend WithEvents EventLog1 As EventLog
     Friend WithEvents Label1 As Label
-    Friend WithEvents LoginName As Label
-    Friend WithEvents LogoutButton As Button
 End Class
