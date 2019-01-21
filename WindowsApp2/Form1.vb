@@ -247,16 +247,25 @@ Public Class Form1
                 da.Fill(ds, "Brands")
                 Dim dt As DataTable = ds.Tables("Brands")
 
+                For Each row In dt.Rows
+                    If row("BrandName") = AddNewItemBox.Text Then
+                        MsgBox("Podana marka istnieje już w bazie danych !")
+                        Exit Sub
+                    End If
+                Next row
+
                 Dim newRow As DataRow
                 newRow = dt.NewRow()
                 'newRow("Brand_ID") = ""
                 newRow("BrandName") = AddNewItemBox.Text
                 dt.Rows.Add(newRow)
                 da.Update(ds, "Brands")
+                CarList.Items.Add(AddNewItemBox.Text)
+                'CarList.Sorted = True
                 'query()
             ElseIf ModelRadioButton.Checked = True Then
 
-            End If
+                End If
         End If
     End Sub
 

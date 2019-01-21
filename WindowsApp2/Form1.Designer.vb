@@ -56,6 +56,7 @@ Partial Class Form1
         Me.CarList.Location = New System.Drawing.Point(45, 291)
         Me.CarList.Name = "CarList"
         Me.CarList.Size = New System.Drawing.Size(120, 95)
+        Me.CarList.Sorted = True
         Me.CarList.TabIndex = 0
         '
         'ModelList
@@ -64,6 +65,7 @@ Partial Class Form1
         Me.ModelList.Location = New System.Drawing.Point(171, 291)
         Me.ModelList.Name = "ModelList"
         Me.ModelList.Size = New System.Drawing.Size(120, 95)
+        Me.ModelList.Sorted = True
         Me.ModelList.TabIndex = 0
         '
         'ColorList
@@ -201,7 +203,6 @@ Partial Class Form1
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Dodawanie danych"
-        Me.GroupBox1.Visible = False
         '
         'LoadDbButton
         '
