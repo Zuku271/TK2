@@ -247,7 +247,7 @@ Public Class Form1
 
     Private Sub AddNewItemButton_Click(sender As Object, e As EventArgs) Handles AddNewItemButton.Click
         If AddNewItemBox.Text <> "" Then
-
+            delegacja(AddNewItemBox.Text)
         End If
     End Sub
 
@@ -260,14 +260,14 @@ Public Class Form1
         Dim ds As New DataSet
 
         da.SelectCommand = New SqlCommand("SELECT * FROM Brands")
-        da.InsertCommand = New SqlCommand("INSERT INTO Brands (BrandName) VALUES ('" & AddNewItemBox.Text & "')")
+        da.InsertCommand = New SqlCommand("INSERT INTO Brands (BrandName) VALUES ('" & itemName & "')")
         da.SelectCommand.Connection = conn
         da.InsertCommand.Connection = conn
         da.Fill(ds, "Brands")
         Dim dt As DataTable = ds.Tables("Brands")
 
         For Each row In dt.Rows
-            If row("BrandName") = AddNewItemBox.Text Then
+            If row("BrandName") = itemName Then
                 MsgBox("Podana marka istnieje już w bazie danych !")
                 Exit Sub
             End If
@@ -276,16 +276,16 @@ Public Class Form1
         Dim newRow As DataRow
         newRow = dt.NewRow()
         'newRow("Brand_ID") = ""
-        newRow("BrandName") = AddNewItemBox.Text
+        newRow("BrandName") = itemName
         dt.Rows.Add(newRow)
         da.Update(ds, "Brands")
-        CarList.Items.Add(AddNewItemBox.Text)
+        CarList.Items.Add(itemName)
         AddNewItemBox.Clear()
         'CarList.Sorted = True
         'query()
     End Sub
 
-    Private Sub addNewBrand(ByRef itemName As String)
+    Private Sub addNewModel(ByRef itemName As String)
         Dim conn As New SqlConnection
         conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
 
@@ -293,30 +293,27 @@ Public Class Form1
         Dim da As New SqlDataAdapter
         Dim ds As New DataSet
 
-        da.SelectCommand = New SqlCommand("SELECT * FROM Brands")
-        da.InsertCommand = New SqlCommand("INSERT INTO Brands (BrandName) VALUES ('" & AddNewItemBox.Text & "')")
+        da.SelectCommand = New SqlCommand("SELECT * FROM Models")
+        da.InsertCommand = New SqlCommand("INSERT INTO Models (ModelName) VALUES ('" & itemName & "')")
         da.SelectCommand.Connection = conn
         da.InsertCommand.Connection = conn
-        da.Fill(ds, "Brands")
-        Dim dt As DataTable = ds.Tables("Brands")
+        da.Fill(ds, "Models")
+        Dim dt As DataTable = ds.Tables("Models")
 
         For Each row In dt.Rows
-            If row("BrandName") = AddNewItemBox.Text Then
-                MsgBox("Podana marka istnieje już w bazie danych !")
+            If row("ModelName") = itemName Then
+                MsgBox("Podany model istnieje już w bazie danych !")
                 Exit Sub
             End If
         Next row
 
         Dim newRow As DataRow
         newRow = dt.NewRow()
-        'newRow("Brand_ID") = ""
-        newRow("BrandName") = AddNewItemBox.Text
+        newRow("ModelName") = itemName
         dt.Rows.Add(newRow)
-        da.Update(ds, "Brands")
-        CarList.Items.Add(AddNewItemBox.Text)
+        da.Update(ds, "Models")
+        ModelList.Items.Add(itemName)
         AddNewItemBox.Clear()
-        'CarList.Sorted = True
-        'query()
     End Sub
 
     Private Function query(sqlQuery As String)
