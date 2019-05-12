@@ -1,7 +1,7 @@
 ﻿Imports System.Data
 Imports System.Data.Sql
 Imports System.Data.SqlClient
-
+Imports WindowsApp2
 
 Public Class Form1
     'Private objTabela As DataTable
@@ -11,6 +11,10 @@ Public Class Form1
     'Private ds_Colors As DataSet
     'Private ds_Equipment As DataSet
     Private DBPath As String
+    Private delegacja As addNewItemToDB
+
+    '
+    Delegate Sub addNewItemToDB(ByRef itemName As String)
 
     Public Sub New()
         InitializeComponent()
@@ -43,6 +47,9 @@ Public Class Form1
         For Each row In objTabela.Rows
             CarList.Items.Add(row("BrandName"))
         Next row
+
+        'Tworzenie delegacji
+        delegacja = New addNewItemToDB(AddressOf addNewBrand)
     End Sub
 
     'Private Sub LogoutButton_Click(sender As Object, e As EventArgs) Handles LogoutButton.Click
@@ -52,7 +59,6 @@ Public Class Form1
     '  GroupBox2.Visible = True
     'End Sub
 
-    'Tworzenie delegata
 
     Private Sub CarList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CarList.SelectedIndexChanged
         reload()
@@ -229,6 +235,7 @@ Public Class Form1
         End If
 
 
+
     End Sub
 
     Private Sub LogoutButton_Click(sender As Object, e As EventArgs) Handles LogoutButton.Click
@@ -240,28 +247,22 @@ Public Class Form1
 
     Private Sub AddNewItemButton_Click(sender As Object, e As EventArgs) Handles AddNewItemButton.Click
         If AddNewItemBox.Text <> "" Then
-            Dim conn As New SqlConnection
-            conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
 
-            conn.Open()
-            Dim da As New SqlDataAdapter
-            Dim ds As New DataSet
-
-            da.SelectCommand = New SqlCommand("SELECT * FROM Brands")
-            da.InsertCommand = New SqlCommand("INSERT INTO Brands (BrandName) VALUES ('" & AddNewItemBox.Text & "')")
-            da.SelectCommand.Connection = conn
-            da.InsertCommand.Connection = conn
-
-
-            If BrandRadioButton.Checked = True Then
-
-            ElseIf ModelRadioButton.Checked = True Then
-
-                End If
         End If
     End Sub
 
-    Private Sub appendNewBrand(ByRef brandName As String)
+    Private Sub addNewBrand(ByRef itemName As String)
+        Dim conn As New SqlConnection
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
+
+        conn.Open()
+        Dim da As New SqlDataAdapter
+        Dim ds As New DataSet
+
+        da.SelectCommand = New SqlCommand("SELECT * FROM Brands")
+        da.InsertCommand = New SqlCommand("INSERT INTO Brands (BrandName) VALUES ('" & AddNewItemBox.Text & "')")
+        da.SelectCommand.Connection = conn
+        da.InsertCommand.Connection = conn
         da.Fill(ds, "Brands")
         Dim dt As DataTable = ds.Tables("Brands")
 
@@ -279,6 +280,41 @@ Public Class Form1
         dt.Rows.Add(newRow)
         da.Update(ds, "Brands")
         CarList.Items.Add(AddNewItemBox.Text)
+        AddNewItemBox.Clear()
+        'CarList.Sorted = True
+        'query()
+    End Sub
+
+    Private Sub addNewBrand(ByRef itemName As String)
+        Dim conn As New SqlConnection
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
+
+        conn.Open()
+        Dim da As New SqlDataAdapter
+        Dim ds As New DataSet
+
+        da.SelectCommand = New SqlCommand("SELECT * FROM Brands")
+        da.InsertCommand = New SqlCommand("INSERT INTO Brands (BrandName) VALUES ('" & AddNewItemBox.Text & "')")
+        da.SelectCommand.Connection = conn
+        da.InsertCommand.Connection = conn
+        da.Fill(ds, "Brands")
+        Dim dt As DataTable = ds.Tables("Brands")
+
+        For Each row In dt.Rows
+            If row("BrandName") = AddNewItemBox.Text Then
+                MsgBox("Podana marka istnieje już w bazie danych !")
+                Exit Sub
+            End If
+        Next row
+
+        Dim newRow As DataRow
+        newRow = dt.NewRow()
+        'newRow("Brand_ID") = ""
+        newRow("BrandName") = AddNewItemBox.Text
+        dt.Rows.Add(newRow)
+        da.Update(ds, "Brands")
+        CarList.Items.Add(AddNewItemBox.Text)
+        AddNewItemBox.Clear()
         'CarList.Sorted = True
         'query()
     End Sub
@@ -300,6 +336,10 @@ Public Class Form1
     End Function
 
     Private Sub BrandRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles BrandRadioButton.CheckedChanged
+        delegacja = New addNewItemToDB(AddressOf addNewBrand)
+    End Sub
 
+    Private Sub ModelRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles ModelRadioButton.CheckedChanged
+        delegacja = New addNewItemToDB(AddressOf addNewModel)
     End Sub
 End Class
