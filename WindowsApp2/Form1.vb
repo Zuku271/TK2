@@ -52,6 +52,8 @@ Public Class Form1
     '  GroupBox2.Visible = True
     'End Sub
 
+    'Tworzenie delegata
+
     Private Sub CarList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CarList.SelectedIndexChanged
         reload()
     End Sub
@@ -229,6 +231,13 @@ Public Class Form1
 
     End Sub
 
+    Private Sub LogoutButton_Click(sender As Object, e As EventArgs) Handles LogoutButton.Click
+        LoginFormButton.Enabled = True
+        LoginFormButton.Show()
+        LogoutButton.Hide()
+        GroupBox1.Hide()
+    End Sub
+
     Private Sub AddNewItemButton_Click(sender As Object, e As EventArgs) Handles AddNewItemButton.Click
         If AddNewItemBox.Text <> "" Then
             Dim conn As New SqlConnection
@@ -243,37 +252,35 @@ Public Class Form1
             da.SelectCommand.Connection = conn
             da.InsertCommand.Connection = conn
 
+
             If BrandRadioButton.Checked = True Then
-                da.Fill(ds, "Brands")
-                Dim dt As DataTable = ds.Tables("Brands")
 
-                For Each row In dt.Rows
-                    If row("BrandName") = AddNewItemBox.Text Then
-                        MsgBox("Podana marka istnieje już w bazie danych !")
-                        Exit Sub
-                    End If
-                Next row
-
-                Dim newRow As DataRow
-                newRow = dt.NewRow()
-                'newRow("Brand_ID") = ""
-                newRow("BrandName") = AddNewItemBox.Text
-                dt.Rows.Add(newRow)
-                da.Update(ds, "Brands")
-                CarList.Items.Add(AddNewItemBox.Text)
-                'CarList.Sorted = True
-                'query()
             ElseIf ModelRadioButton.Checked = True Then
 
                 End If
         End If
     End Sub
 
-    Private Sub LogoutButton_Click(sender As Object, e As EventArgs) Handles LogoutButton.Click
-        LoginFormButton.Enabled = True
-        LoginFormButton.Show()
-        LogoutButton.Hide()
-        GroupBox1.Hide()
+    Private Sub appendNewBrand(ByRef brandName As String)
+        da.Fill(ds, "Brands")
+        Dim dt As DataTable = ds.Tables("Brands")
+
+        For Each row In dt.Rows
+            If row("BrandName") = AddNewItemBox.Text Then
+                MsgBox("Podana marka istnieje już w bazie danych !")
+                Exit Sub
+            End If
+        Next row
+
+        Dim newRow As DataRow
+        newRow = dt.NewRow()
+        'newRow("Brand_ID") = ""
+        newRow("BrandName") = AddNewItemBox.Text
+        dt.Rows.Add(newRow)
+        da.Update(ds, "Brands")
+        CarList.Items.Add(AddNewItemBox.Text)
+        'CarList.Sorted = True
+        'query()
     End Sub
 
     Private Function query(sqlQuery As String)
@@ -291,4 +298,8 @@ Public Class Form1
         dataadapter.SelectCommand.Connection = conn
         Return 1
     End Function
+
+    Private Sub BrandRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles BrandRadioButton.CheckedChanged
+
+    End Sub
 End Class
