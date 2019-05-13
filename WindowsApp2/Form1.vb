@@ -293,12 +293,23 @@ Public Class Form1
         Dim da As New SqlDataAdapter
         Dim ds As New DataSet
 
+
         da.SelectCommand = New SqlCommand("SELECT * FROM Models")
         da.InsertCommand = New SqlCommand("INSERT INTO Models (ModelName) VALUES ('" & itemName & "')")
         da.SelectCommand.Connection = conn
         da.InsertCommand.Connection = conn
         da.Fill(ds, "Models")
         Dim dt As DataTable = ds.Tables("Models")
+
+        'Pobieramy producenta
+        Dim daBrandID As New SqlDataAdapter
+        Dim dsBrandID As New DataSet
+
+        daBrandID.SelectCommand = New SqlCommand("SELECT Brand_ID FROM Brans WHERE BrandName = '" & CarList.SelectedItem.ToString & "'")
+        daBrandID.SelectCommand.Connection = conn
+        daBrandID.Fill(dsBrandID, "Brands")
+
+        Dim dtBrandID As DataTable = dsBrandID.Tables("Brands")
 
         For Each row In dt.Rows
             If row("ModelName") = itemName Then
@@ -310,6 +321,7 @@ Public Class Form1
         Dim newRow As DataRow
         newRow = dt.NewRow()
         newRow("ModelName") = itemName
+        newRow("Brand_ID") = CarList.SelectedIndex
         dt.Rows.Add(newRow)
         da.Update(ds, "Models")
         ModelList.Items.Add(itemName)
