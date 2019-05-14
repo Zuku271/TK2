@@ -295,9 +295,9 @@ Public Class Form1
 
 
         da.SelectCommand = New SqlCommand("SELECT * FROM Models")
-        da.InsertCommand = New SqlCommand("INSERT INTO Models (ModelName) VALUES ('" & itemName & "')")
+        'da.InsertCommand = New SqlCommand("INSERT INTO Models (ModelName, Brand_ID)")
         da.SelectCommand.Connection = conn
-        da.InsertCommand.Connection = conn
+
         da.Fill(ds, "Models")
         Dim dt As DataTable = ds.Tables("Models")
 
@@ -305,7 +305,7 @@ Public Class Form1
         Dim daBrandID As New SqlDataAdapter
         Dim dsBrandID As New DataSet
 
-        daBrandID.SelectCommand = New SqlCommand("SELECT Brand_ID FROM Brans WHERE BrandName = '" & CarList.SelectedItem.ToString & "'")
+        daBrandID.SelectCommand = New SqlCommand("SELECT Brand_ID FROM Brands WHERE BrandName = '" & CarList.SelectedItem.ToString & "'")
         daBrandID.SelectCommand.Connection = conn
         daBrandID.Fill(dsBrandID, "Brands")
 
@@ -320,8 +320,11 @@ Public Class Form1
 
         Dim newRow As DataRow
         newRow = dt.NewRow()
-        newRow("ModelName") = itemName
-        newRow("Brand_ID") = CarList.SelectedIndex
+        'newRow("ModelName") = itemName
+        'newRow("Brand_ID") = dtBrandID.Rows(0)("Brand_ID")
+
+        da.InsertCommand = New SqlCommand("INSERT INTO Models (ModelName, Brand_ID) VALUES ('" & itemName & "', '" & dtBrandID.Rows(0)("Brand_ID") & "')")
+        da.InsertCommand.Connection = conn
         dt.Rows.Add(newRow)
         da.Update(ds, "Models")
         ModelList.Items.Add(itemName)
