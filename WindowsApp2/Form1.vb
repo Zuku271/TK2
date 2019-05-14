@@ -295,7 +295,6 @@ Public Class Form1
 
 
         da.SelectCommand = New SqlCommand("SELECT * FROM Models")
-        'da.InsertCommand = New SqlCommand("INSERT INTO Models (ModelName, Brand_ID)")
         da.SelectCommand.Connection = conn
 
         da.Fill(ds, "Models")
@@ -324,6 +323,48 @@ Public Class Form1
         'newRow("Brand_ID") = dtBrandID.Rows(0)("Brand_ID")
 
         da.InsertCommand = New SqlCommand("INSERT INTO Models (ModelName, Brand_ID) VALUES ('" & itemName & "', '" & dtBrandID.Rows(0)("Brand_ID") & "')")
+        da.InsertCommand.Connection = conn
+        dt.Rows.Add(newRow)
+        da.Update(ds, "Models")
+        ModelList.Items.Add(itemName)
+        AddNewItemBox.Clear()
+    End Sub
+
+    Private Sub addNewEngine(ByRef itemName As String)
+        Dim conn As New SqlConnection
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
+
+        conn.Open()
+        Dim da As New SqlDataAdapter
+        Dim ds As New DataSet
+
+
+        da.SelectCommand = New SqlCommand("SELECT * FROM Models")
+        da.SelectCommand.Connection = conn
+
+        da.Fill(ds, "Models")
+        Dim dt As DataTable = ds.Tables("Models")
+
+        'Pobieramy model
+        Dim daBrandID As New SqlDataAdapter
+        Dim dsBrandID As New DataSet
+
+        daBrandID.SelectCommand = New SqlCommand("SELECT Model_ID FROM Models WHERE ModelName = '" & ModelList.SelectedItem.ToString & "'")
+        daBrandID.SelectCommand.Connection = conn
+        daBrandID.Fill(dsBrandID, "Brands")
+
+        Dim dtBrandID As DataTable = dsBrandID.Tables("Models")
+
+        For Each row In dt.Rows
+            If row("EngineName") = itemName Then
+                MsgBox("Podany model silnika istnieje już w bazie danych !")
+                Exit Sub
+            End If
+        Next row
+
+        Dim newRow As DataRow
+        newRow = dt.NewRow()
+        da.InsertCommand = New SqlCommand("INSERT INTO Engines (EngineName, Model_ID) VALUES ('" & itemName & "', '" & dtModelID.Rows(0)("Model_ID") & "')")
         da.InsertCommand.Connection = conn
         dt.Rows.Add(newRow)
         da.Update(ds, "Models")
