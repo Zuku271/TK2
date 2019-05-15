@@ -76,8 +76,7 @@ Public Class Form1
         conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
         conn.Open()
 
-        Dim getEngineType_query As New SqlCommand("SELECT EngineType FROM Engines WHERE 
-            Brand_ID = (SELECT Brand_ID FROM Brands WHERE BrandName = '" & CarList.SelectedItem & "') AND
+        Dim getEngineType_query As New SqlCommand("SELECT EngineType FROM Engines WHERE
             Model_ID = (SELECT Model_ID FROM Models WHERE ModelName = '" & ModelList.SelectedItem & "')")
         'Dim getEqTypeList_query As New SqlCommand("SELECT CarEq FROM Equipment WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
         'Dim getColorType_query As New SqlCommand("SELECT ColorType FROM Colors WHERE Brand_ID = '" & CarList.SelectedIndex & "' AND Model_ID = '" & ModelList.SelectedIndex & "';")
@@ -346,14 +345,14 @@ Public Class Form1
         Dim dt As DataTable = ds.Tables("Models")
 
         'Pobieramy model
-        Dim daBrandID As New SqlDataAdapter
-        Dim dsBrandID As New DataSet
+        Dim daModelID As New SqlDataAdapter
+        Dim dsModelID As New DataSet
 
-        daBrandID.SelectCommand = New SqlCommand("SELECT Model_ID FROM Models WHERE ModelName = '" & ModelList.SelectedItem.ToString & "'")
-        daBrandID.SelectCommand.Connection = conn
-        daBrandID.Fill(dsBrandID, "Brands")
+        daModelID.SelectCommand = New SqlCommand("SELECT Model_ID FROM Models WHERE ModelName = '" & ModelList.SelectedItem.ToString & "'")
+        daModelID.SelectCommand.Connection = conn
+        daModelID.Fill(dsModelID, "Brands")
 
-        Dim dtBrandID As DataTable = dsBrandID.Tables("Models")
+        Dim dtModelID As DataTable = dsModelID.Tables("Models")
 
         For Each row In dt.Rows
             If row("EngineName") = itemName Then
