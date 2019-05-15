@@ -330,6 +330,12 @@ Public Class Form1
     End Sub
 
     Private Sub addNewEngine(ByRef itemName As String)
+
+        If ModelList.SelectedIndex = -1 Then
+            MsgBox("Nie wybrano modelu !")
+            Exit Sub
+        End If
+
         Dim conn As New SqlConnection
         conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
 
@@ -338,11 +344,11 @@ Public Class Form1
         Dim ds As New DataSet
 
 
-        da.SelectCommand = New SqlCommand("SELECT * FROM Models")
+        da.SelectCommand = New SqlCommand("SELECT * FROM Engines")
         da.SelectCommand.Connection = conn
 
-        da.Fill(ds, "Models")
-        Dim dt As DataTable = ds.Tables("Models")
+        da.Fill(ds, "Engines")
+        Dim dt As DataTable = ds.Tables("Engines")
 
         'Pobieramy model
         Dim daModelID As New SqlDataAdapter
@@ -350,12 +356,12 @@ Public Class Form1
 
         daModelID.SelectCommand = New SqlCommand("SELECT Model_ID FROM Models WHERE ModelName = '" & ModelList.SelectedItem.ToString & "'")
         daModelID.SelectCommand.Connection = conn
-        daModelID.Fill(dsModelID, "Brands")
+        daModelID.Fill(dsModelID, "Models")
 
         Dim dtModelID As DataTable = dsModelID.Tables("Models")
 
         For Each row In dt.Rows
-            If row("EngineName") = itemName Then
+            If row("Enginetype") = itemName Then
                 MsgBox("Podany model silnika istnieje już w bazie danych !")
                 Exit Sub
             End If
@@ -363,11 +369,11 @@ Public Class Form1
 
         Dim newRow As DataRow
         newRow = dt.NewRow()
-        da.InsertCommand = New SqlCommand("INSERT INTO Engines (EngineName, Model_ID) VALUES ('" & itemName & "', '" & dtModelID.Rows(0)("Model_ID") & "')")
+        da.InsertCommand = New SqlCommand("INSERT INTO Engines (EngineType, Model_ID) VALUES ('" & itemName & "', '" & dtModelID.Rows(0)("Model_ID") & "')")
         da.InsertCommand.Connection = conn
         dt.Rows.Add(newRow)
         da.Update(ds, "Engines")
-        ModelList.Items.Add(itemName)
+        EngineType.Items.Add(itemName)
         AddNewItemBox.Clear()
     End Sub
 
