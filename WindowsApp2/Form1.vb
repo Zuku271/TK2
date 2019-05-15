@@ -366,7 +366,7 @@ Public Class Form1
         da.InsertCommand = New SqlCommand("INSERT INTO Engines (EngineName, Model_ID) VALUES ('" & itemName & "', '" & dtModelID.Rows(0)("Model_ID") & "')")
         da.InsertCommand.Connection = conn
         dt.Rows.Add(newRow)
-        da.Update(ds, "Models")
+        da.Update(ds, "Engines")
         ModelList.Items.Add(itemName)
         AddNewItemBox.Clear()
     End Sub
@@ -393,5 +393,17 @@ Public Class Form1
 
     Private Sub ModelRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles ModelRadioButton.CheckedChanged
         delegacja = New addNewItemToDB(AddressOf addNewModel)
+    End Sub
+
+    Private Sub EngineRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles EngineRadioButton.CheckedChanged
+        delegacja = New addNewItemToDB(AddressOf addNewEngine)
+    End Sub
+
+    Private Sub EqRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles EqRadioButton.CheckedChanged
+
+    End Sub
+
+    Private Sub ColorRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles ColorRadioButton.CheckedChanged
+
     End Sub
 End Class
