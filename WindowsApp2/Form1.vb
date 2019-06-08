@@ -377,6 +377,102 @@ Public Class Form1
         AddNewItemBox.Clear()
     End Sub
 
+    Private Sub addNewEq(ByRef itemName As String)
+
+        If ModelList.SelectedIndex = -1 Then
+            MsgBox("Nie wybrano modelu !")
+            Exit Sub
+        End If
+
+        Dim conn As New SqlConnection
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
+
+        conn.Open()
+        Dim da As New SqlDataAdapter
+        Dim ds As New DataSet
+
+
+        da.SelectCommand = New SqlCommand("SELECT * FROM Engines")
+        da.SelectCommand.Connection = conn
+
+        da.Fill(ds, "Engines")
+        Dim dt As DataTable = ds.Tables("Engines")
+
+        'Pobieramy model
+        Dim daModelID As New SqlDataAdapter
+        Dim dsModelID As New DataSet
+
+        daModelID.SelectCommand = New SqlCommand("SELECT Model_ID FROM Models WHERE ModelName = '" & ModelList.SelectedItem.ToString & "'")
+        daModelID.SelectCommand.Connection = conn
+        daModelID.Fill(dsModelID, "Models")
+
+        Dim dtModelID As DataTable = dsModelID.Tables("Models")
+
+        For Each row In dt.Rows
+            If row("Enginetype") = itemName Then
+                MsgBox("Podany model silnika istnieje już w bazie danych !")
+                Exit Sub
+            End If
+        Next row
+
+        Dim newRow As DataRow
+        newRow = dt.NewRow()
+        da.InsertCommand = New SqlCommand("INSERT INTO Engines (EngineType, Model_ID) VALUES ('" & itemName & "', '" & dtModelID.Rows(0)("Model_ID") & "')")
+        da.InsertCommand.Connection = conn
+        dt.Rows.Add(newRow)
+        da.Update(ds, "Engines")
+        EngineType.Items.Add(itemName)
+        AddNewItemBox.Clear()
+    End Sub
+
+    Private Sub addNewColor(ByRef itemName As String)
+
+        If ModelList.SelectedIndex = -1 Then
+            MsgBox("Nie wybrano modelu !")
+            Exit Sub
+        End If
+
+        Dim conn As New SqlConnection
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
+
+        conn.Open()
+        Dim da As New SqlDataAdapter
+        Dim ds As New DataSet
+
+
+        da.SelectCommand = New SqlCommand("SELECT * FROM Engines")
+        da.SelectCommand.Connection = conn
+
+        da.Fill(ds, "Engines")
+        Dim dt As DataTable = ds.Tables("Engines")
+
+        'Pobieramy model
+        Dim daModelID As New SqlDataAdapter
+        Dim dsModelID As New DataSet
+
+        daModelID.SelectCommand = New SqlCommand("SELECT Model_ID FROM Models WHERE ModelName = '" & ModelList.SelectedItem.ToString & "'")
+        daModelID.SelectCommand.Connection = conn
+        daModelID.Fill(dsModelID, "Models")
+
+        Dim dtModelID As DataTable = dsModelID.Tables("Models")
+
+        For Each row In dt.Rows
+            If row("Enginetype") = itemName Then
+                MsgBox("Podany model silnika istnieje już w bazie danych !")
+                Exit Sub
+            End If
+        Next row
+
+        Dim newRow As DataRow
+        newRow = dt.NewRow()
+        da.InsertCommand = New SqlCommand("INSERT INTO Engines (EngineType, Model_ID) VALUES ('" & itemName & "', '" & dtModelID.Rows(0)("Model_ID") & "')")
+        da.InsertCommand.Connection = conn
+        dt.Rows.Add(newRow)
+        da.Update(ds, "Engines")
+        EngineType.Items.Add(itemName)
+        AddNewItemBox.Clear()
+    End Sub
+
     Private Function query(sqlQuery As String)
         Dim conn As New SqlConnection
         conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
@@ -406,10 +502,10 @@ Public Class Form1
     End Sub
 
     Private Sub EqRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles EqRadioButton.CheckedChanged
-
+        delegacja = New addNewItemToDB(AddressOf addNewEq)
     End Sub
 
     Private Sub ColorRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles ColorRadioButton.CheckedChanged
-
+        delegacja = New addNewItemToDB(AddressOf addNewColor)
     End Sub
 End Class
