@@ -438,11 +438,20 @@ Public Class Form1
         Dim ds As New DataSet
 
 
-        da.SelectCommand = New SqlCommand("SELECT * FROM Engines")
+        da.SelectCommand = New SqlCommand("SELECT CarEq FROM Equipment")
         da.SelectCommand.Connection = conn
 
-        da.Fill(ds, "Engines")
-        Dim dt As DataTable = ds.Tables("Engines")
+        da.Fill(ds, "CarEq")
+        Dim dt As DataTable = ds.Tables("CarEq")
+
+        For Each row In dt.Rows
+            If row("CarEq") = itemName Then
+                MsgBox("Podana wersja wyposazenia istnieje juz w bazie danych !")
+                Exit Sub
+            End If
+        Next row
+
+        'da.SelectCommand = New SqlCommand("SELECT")
 
         'Pobieramy model
         Dim daModelID As New SqlDataAdapter
@@ -463,7 +472,7 @@ Public Class Form1
 
         Dim newRow As DataRow
         newRow = dt.NewRow()
-        da.InsertCommand = New SqlCommand("INSERT INTO Engines (EngineType, Model_ID) VALUES ('" & itemName & "', '" & dtModelID.Rows(0)("Model_ID") & "')")
+        da.InsertCommand = New SqlCommand("INSERT INTO Equipment (CarEq, Model_ID) VALUES ('" & itemName & "', '" & dtModelID.Rows(0)("Model_ID") & "')")
         da.InsertCommand.Connection = conn
         dt.Rows.Add(newRow)
         da.Update(ds, "Engines")
