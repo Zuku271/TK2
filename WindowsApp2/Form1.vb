@@ -50,6 +50,7 @@ Public Class Form1
 
         'Tworzenie delegacji
         delegacja = New addNewItemToDB(AddressOf addNewBrand)
+        conn.Close()
     End Sub
 
     'Private Sub LogoutButton_Click(sender As Object, e As EventArgs) Handles LogoutButton.Click
@@ -61,7 +62,35 @@ Public Class Form1
 
 
     Private Sub CarList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CarList.SelectedIndexChanged
-        reload()
+        Dim conn As SqlConnection
+        conn = New SqlConnection
+
+        conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
+        conn.Open()
+
+        ' Odświeżanie listy modeli
+        Dim sql_Query_Models As New SqlCommand("SELECT ModelName FROM Models WHERE Brand_ID =
+            (SELECT Brand_ID FROM Brands WHERE BrandName = '" & CarList.SelectedItem & "')")
+        Dim data_Adapter_Models As New SqlDataAdapter
+        Dim ds_Models As New DataSet
+        Dim obj_Table_Models As New DataTable
+
+        data_Adapter_Models.SelectCommand = sql_Query_Models
+        data_Adapter_Models.SelectCommand.Connection = conn
+        data_Adapter_Models.Fill(ds_Models, "Models")
+
+        obj_Table_Models = ds_Models.Tables("Models")
+
+        ModelList.Items.Clear()
+        EngineType.Items.Clear()
+        ColorList.Items.Clear()
+        EqTypeList.Items.Clear()
+
+        For Each row In obj_Table_Models.Rows
+            ModelList.Items.Add(row("ModelName"))
+        Next row
+
+        conn.Close()
     End Sub
 
     Private Sub ModelList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ModelList.SelectedIndexChanged
@@ -99,9 +128,6 @@ Public Class Form1
         'For Each row In objTabela.Rows
         'EqTypeList.Items.Add(row("CarEq"))
         'Next row
-
-
-
         conn.Close()
     End Sub
 
@@ -112,10 +138,11 @@ Public Class Form1
         conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
         conn.Open()
 
-        Dim sql_Query As New SqlCommand("SELECT C.CarEq FROM Equipment C, Brands B, Models M, Engines E
-            WHERE C.Brand_ID = B.Brand_ID
-            AND C.Model_ID = M.Model_ID
-            AND C.Engine_ID = E.Engine_ID")
+        Dim sql_Query As New SqlCommand("SELECT C.CarEq FROM Equipment C
+          WHERE C.Brand_ID = (SELECT Brand_ID FROM Brands WHERE BrandName = '" & CarList.SelectedItem.ToString() & "')
+          And C.Model_ID = (SELECT Model_ID FROM Models WHERE ModelName = '" & ModelList.SelectedItem.ToString() & "')
+          And C.Engine_ID = (SELECT Engine_ID FROM Engines WHERE EngineType = '" & EngineType.SelectedItem.ToString() & "')")
+        'Dim sql_Query As New SqlCommand("SELECT ")
         Dim dataadapter As New SqlDataAdapter
         Dim ds As New DataSet
         Dim objTabela As New DataTable
@@ -142,8 +169,8 @@ Public Class Form1
 
         Dim sql_Query As New SqlCommand("SELECT C.Color, C.ColorType FROM Colors C, Brands B, Models M, Equipment E
             WHERE C.Brand_ID = B.Brand_ID
-            AND C.Model_ID = M.Model_ID
-            AND C.Eq_ID = E.Eq_ID")
+            And C.Model_ID = M.Model_ID
+            And C.Eq_ID = E.Eq_ID")
         Dim dataAdapter As New SqlDataAdapter
         Dim ds_Color As New DataSet
         Dim ds_ColorType As New DataSet
@@ -172,13 +199,14 @@ Public Class Form1
 
     End Sub
 
+    ' Zmiana pliku bazy danych
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         'Dim fileName As String
         Dim filePath As String
         Dim OpenFile As OpenFileDialog = New OpenFileDialog()
 
-        OpenFile.InitialDirectory = "D:"
-        OpenFile.Filter = "mdf files (*.mdf)|*.mdf|All files (*.*)|*.*"
+        OpenFile.InitialDirectory = "D:\Kody\Git\TK2"
+        OpenFile.Filter = "mdf files (*.mdf)|*.mdf"
         OpenFile.FilterIndex = 2
         OpenFile.RestoreDirectory = True
 
@@ -199,25 +227,43 @@ Public Class Form1
         conn.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & DBPath & ";Integrated Security=True;Connect Timeout=30"
         conn.Open()
 
-        Dim sql_Query As New SqlCommand("SELECT ModelName FROM Models WHERE Brand_ID =
-            (SELECT Brand_ID FROM Brands WHERE BrandName = '" & CarList.SelectedItem & "')")
-        Dim dataadapter As New SqlDataAdapter
-        Dim ds As New DataSet
-        Dim objTabela As New DataTable
+        Dim sql_Query_Brands As New SqlCommand("SELECT BrandName FROM Brands")
+        Dim data_Adapter_Brands As New SqlDataAdapter
+        Dim ds_Brands As New DataSet
+        Dim obj_Table_Brands As New DataTable
 
-        dataadapter.SelectCommand = sql_Query
-        dataadapter.SelectCommand.Connection = conn
-        dataadapter.Fill(ds, "Models")
+        data_Adapter_Brands.SelectCommand = sql_Query_Brands
+        data_Adapter_Brands.SelectCommand.Connection = conn
+        data_Adapter_Brands.Fill(ds_Brands, "Brands")
 
-        objTabela = ds.Tables("Models")
+        obj_Table_Brands = ds_Brands.Tables("Brands")
+        CarList.Items.Clear()
         ModelList.Items.Clear()
         EngineType.Items.Clear()
         ColorList.Items.Clear()
         EqTypeList.Items.Clear()
 
-        For Each row In objTabela.Rows
+        For Each row In obj_Table_Brands.Rows
+            CarList.Items.Add(row("BrandName"))
+        Next row
+
+        ' Odświeżanie listy modeli
+        Dim sql_Query_Models As New SqlCommand("SELECT ModelName FROM Models WHERE Brand_ID =
+            (SELECT Brand_ID FROM Brands WHERE BrandName = '" & CarList.SelectedItem & "')")
+        Dim data_Adapter_Models As New SqlDataAdapter
+        Dim ds_Models As New DataSet
+        Dim obj_Table_Models As New DataTable
+
+        data_Adapter_Models.SelectCommand = sql_Query_Models
+        data_Adapter_Models.SelectCommand.Connection = conn
+        data_Adapter_Models.Fill(ds_Models, "Models")
+
+        obj_Table_Models = ds_Models.Tables("Models")
+
+        For Each row In obj_Table_Models.Rows
             ModelList.Items.Add(row("ModelName"))
         Next row
+
         conn.Close()
     End Function
 

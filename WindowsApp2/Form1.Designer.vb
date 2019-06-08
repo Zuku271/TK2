@@ -203,6 +203,7 @@ Partial Class Form1
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Dodawanie danych"
+        Me.GroupBox1.Visible = False
         '
         'LoadDbButton
         '
